@@ -1,0 +1,15 @@
+# Extra stuff for bash
+#
+# just:
+#
+#  source ~/.bashrc-extra
+#  or
+#  echo "source ~/.bashrc-extra" >> ~/.bashrc
+
+#export GEM_HOME=$HOME/gems
+
+for i in $HOME/.gem/ruby/*; do
+  export PATH=$PATH:$i/bin
+done
+
+alias ack=ack-grep
