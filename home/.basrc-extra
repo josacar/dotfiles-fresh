@@ -13,3 +13,13 @@ for i in $HOME/.gem/ruby/*; do
 done
 
 alias ack=ack-grep
+export COPYFILE_DISABLE=true # For OSX suckness
+export EDITOR=vi
+
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
+
+alias ggpull='git pull --rebase origin $(current_branch)'
+alias ggpush='git push origin $(current_branch)'
