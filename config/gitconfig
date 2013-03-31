@@ -1,0 +1,49 @@
+[user]
+  email = josacar@gmail.com
+  name = Jose Luis Salas
+[github]
+  user = josacar
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  ui = true
+[push]
+  default = current
+[alias]
+  review = !"git log master..origin/master"
+  am = am -3
+  st = status
+  co = checkout
+  di = diff
+  dc = diff --cached
+  sh = show
+  ci = commit
+  amend = commit --amend
+  br = branch
+  ll = log --decorate -p
+  fp = format-patch
+  cp = cherry-pick
+  noff = merge --no-ff
+  aa = add --all
+  fa = fetch --all
+  fapu = "!git fa && git pull"
+  l = "!source ~/.githelpers && pretty_git_log"
+  la = !git l --all
+  r = !git l -20
+  rs = !git l -10
+  ra = !git r --all
+  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; $EDITOR `f`"
+  add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+  # up = !git stash && git pull --rebase && git push origin `git name-rev --name-only HEAD` && git stash pop
+[branch]
+  autosetuprebase = always
+[diff]
+  tool = diffmerge
+[difftool "diffmerge"]
+  cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+  tool = diffmerge
+[mergetool "diffmerge"]
+  cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+  trustExitCode = true
