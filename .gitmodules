@@ -1,18 +1,18 @@
-[submodule ".vim/bundle/ctrlp.vim"]
-	path = .vim/bundle/ctrlp.vim
+[submodule "home/.vim/bundle/ctrlp.vim"]
+	path = home/.vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
+[submodule "home/.vim/bundle/nerdtree"]
+	path = home/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule ".vim/bundle/supertab"]
-	path = .vim/bundle/supertab
+[submodule "home/.vim/bundle/supertab"]
+	path = home/.vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule ".vim/bundle/vim-notes"]
-	path = .vim/bundle/vim-notes
+[submodule "home/.vim/bundle/vim-notes"]
+	path = home/.vim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
-[submodule ".vim/bundle/vim-surround"]
-	path = .vim/bundle/vim-surround
+[submodule "home/.vim/bundle/vim-surround"]
+	path = home/.vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".vim/bundle/vimux"]
-	path = .vim/bundle/vimux
+[submodule "home/.vim/bundle/vimux"]
+	path = home/.vim/bundle/vimux
 	url = https://github.com/benmills/vimux.git
