@@ -1,42 +1,42 @@
-[submodule "home/.vim/bundle/ctrlp.vim"]
-	path = home/.vim/bundle/ctrlp.vim
+[submodule "vim/vim/gc/bundle/ctrlp.vim"]
+	path = vim/vim/gc/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule "home/.vim/bundle/nerdtree"]
-	path = home/.vim/bundle/nerdtree
+[submodule "vim/vim/gc/bundle/nerdtree"]
+	path = vim/vim/gc/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "home/.vim/bundle/supertab"]
-	path = home/.vim/bundle/supertab
+[submodule "vim/vim/gc/bundle/supertab"]
+	path = vim/vim/gc/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "home/.vim/bundle/vim-notes"]
-	path = home/.vim/bundle/vim-notes
+[submodule "vim/vim/gc/bundle/vim-notes"]
+	path = vim/vim/gc/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
-[submodule "home/.vim/bundle/vim-surround"]
-	path = home/.vim/bundle/vim-surround
+[submodule "vim/vim/gc/bundle/vim-surround"]
+	path = vim/vim/gc/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "home/.vim/bundle/vimux"]
-	path = home/.vim/bundle/vimux
+[submodule "vim/vim/gc/bundle/vimux"]
+	path = vim/vim/gc/bundle/vimux
 	url = https://github.com/benmills/vimux.git
-[submodule "home/.vim/bundle/ack.vim"]
-	path = home/.vim/bundle/ack.vim
+[submodule "vim/vim/gc/bundle/ack.vim"]
+	path = vim/vim/gc/bundle/ack.vim
 	url = git://github.com/mileszs/ack.vim.git
-[submodule "home/.vim/bundle/vim-endwise"]
-	path = home/.vim/bundle/vim-endwise
+[submodule "vim/vim/gc/bundle/vim-endwise"]
+	path = vim/vim/gc/bundle/vim-endwise
 	url = git://github.com/tpope/vim-endwise.git
-[submodule "home/.vim/bundle/vim-markdown"]
-	path = home/.vim/bundle/vim-markdown
+[submodule "vim/vim/gc/bundle/vim-markdown"]
+	path = vim/vim/gc/bundle/vim-markdown
 	url = git://github.com/plasticboy/vim-markdown.git
-[submodule "home/.vim/bundle/vim-ruby"]
-	path = home/.vim/bundle/vim-ruby
+[submodule "vim/vim/gc/bundle/vim-ruby"]
+	path = vim/vim/gc/bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
-[submodule "home/.vim/bundle/tabular"]
-	path = home/.vim/bundle/tabular
+[submodule "vim/vim/gc/bundle/tabular"]
+	path = vim/vim/gc/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
-[submodule "home/.vim/bundle/vim-commentary"]
-	path = home/.vim/bundle/vim-commentary
+[submodule "vim/vim/gc/bundle/vim-commentary"]
+	path = vim/vim/gc/bundle/vim-commentary
 	url = git://github.com/tpope/vim-commentary.git
-[submodule "home/.vim/bundle/vim-fugitive"]
-	path = home/.vim/bundle/vim-fugitive
+[submodule "vim/vim/gc/bundle/vim-fugitive"]
+	path = vim/vim/gc/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "home/.vim/bundle/powerline"]
-	path = home/.vim/bundle/powerline
+[submodule "vim/vim/gc/bundle/powerline"]
+	path = vim/vim/gc/bundle/powerline
 	url = git://github.com/Lokaltog/powerline.git

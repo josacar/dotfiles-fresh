@@ -1,25 +1,12 @@
 My personal dotfiles
 ====================
 
-# Installation
+## Installation
 
-## Install homesick
+``` sh
+FRESH_LOCAL_SOURCE=josacar/dotfiles bash -c "`curl -sL get.freshshell.com`"
+```
 
-### As ruby gem
+My dotfiles are managed by [fresh].
 
-- ``gem install homesick``
-
-### As bash script
-
-- ``curl -sL https://raw.github.com/andsens/homeshick/master/install.sh | bash``
-- ``printf '\nalias homesick="$HOME/.homeshick"' >> ~/.bashrc``
-
-## Get the castle
-
-- ``homesick clone josacar/dotfiles``
-- ``homesick symlink josacar/dotfiles``
-
-# Updating
-
-- ``homesick pull josacar/dotfiles``
-- ``homesick symlink josacar/dotfiles``
+[fresh]: http://freshshell.com

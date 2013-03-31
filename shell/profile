@@ -1,0 +1,6 @@
+alias ack=ack-grep
+
+for i in $HOME/.gem/ruby/*; do
+  export PATH=$PATH:$i/bin
+done
+
