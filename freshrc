@@ -1,4 +1,5 @@
 # vim: set ft=sh:
+FRESH_NO_LOCAL_CHECK=true
 
 fresh freshshell/fresh bin/fresh --bin
 
