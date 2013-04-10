@@ -1,4 +1,5 @@
 alias ack=ack-grep
+set -o vi
 
 for i in $HOME/.gem/ruby/*; do
   export PATH=$PATH:$i/bin
