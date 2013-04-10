@@ -1,24 +1,23 @@
 # vim: set ft=sh:
-FRESH_NO_LOCAL_CHECK=true
 
 fresh freshshell/fresh bin/fresh --bin
 
 fresh freshshell/fresh contrib/source-build.sh --file=~/.bash_profile
 
 # Some shell aliases
-fresh josacar/dotfiles shell/aliases/\*
-fresh josacar/dotfiles shell/\*
+fresh shell/aliases/\*
+fresh shell/\*
 
 fresh-options --file=~/.bashrc --marker=#
-  fresh josacar/dotfiles shell/bashrc/\*
+  fresh shell/bashrc/\*
   fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
 fresh freshshell/fresh contrib/completion/fresh-completion.bash
 
 # Config files
-fresh josacar/dotfiles config/\* --file
+fresh config/\* --file
 
 # Vim files
-fresh josacar/dotfiles vim/vimrc --file
-fresh josacar/dotfiles vim/vim --file=~/.vim/
+fresh vim/vimrc --file
+fresh vim/vim --file=~/.vim/
