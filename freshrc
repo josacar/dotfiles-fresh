@@ -16,6 +16,11 @@ fresh freshshell/fresh contrib/completion/fresh-completion.bash
 # Config files
 fresh config/\* --file
 
+# Tmux
+fresh-options --file=~/.tmux.conf --marker=#
+  fresh tmux/\*
+fresh-options
+
 # Vim files
 fresh vim/vimrc --file
 fresh vim/vim --file=~/.vim/
