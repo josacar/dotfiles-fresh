@@ -24,3 +24,6 @@ fresh-options
 # Vim files
 fresh vim/vimrc --file
 fresh vim/vim --file=~/.vim/
+
+# Gemfile
+fresh Gemfile --file=~/Gemfile
