@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'pry'
+gem 'pry-rails'
+gem 'pry-coolline'
 gem 'hirb'
 gem 'interactive_editor'
 gem 'fancy_irb'
