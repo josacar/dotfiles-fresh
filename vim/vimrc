@@ -54,8 +54,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 set autoread                     " Update open files when changed externally
 
 " Or use vividchalk
-"set t_Co=256
-"colorscheme vividchalk
+set t_Co=256
+colorscheme vividchalk
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
