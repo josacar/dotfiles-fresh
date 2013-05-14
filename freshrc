@@ -21,9 +21,12 @@ fresh-options --file=~/.tmux.conf --marker=#
   fresh tmux/\*
 fresh-options
 
-# Vim files
+# Vim
 fresh vim/vimrc --file
 fresh vim/vim --file=~/.vim/
+
+# OpenSSH
+fresh ssh/config --file=~/.ssh/config
 
 # Gemfile
 fresh Gemfile --file=~/Gemfile
