@@ -1,4 +1,5 @@
-alias less="less -r"
-alias ack="ack-grep"
-alias ber="bundle exec rspec"
-alias be="bundle exec"
+alias less='less -r'
+alias ack='ack-grep'
+alias ber='bundle exec rspec'
+alias be='bundle exec'
+alias vless='/usr/share/vim/vim73/macros/less.sh'
