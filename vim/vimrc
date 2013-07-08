@@ -149,3 +149,4 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
 set suffixesadd+=.rb
+let g:airline_powerline_fonts=1
