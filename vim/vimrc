@@ -2,7 +2,6 @@ set encoding=utf-8
 set nocompatible                  " Must come first because it changes other options.
 set background=dark
 
-silent! call pathogen#runtime_append_all_bundles()
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
@@ -48,7 +47,19 @@ set listchars=tab:▸\ ,eol:¬
 "set list                          " Show invisible characters
 "set cursorline                    " Show cursor line.
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+NeoBundle 'Shougo/vimproc'
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
 set autoread                     " Update open files when changed externally
