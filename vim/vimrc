@@ -188,3 +188,7 @@ let g:airline_powerline_fonts=1
 
 " Don't print bufferline bar
 let g:bufferline_echo = 0
+
+" Don't autosave/load sessions
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
