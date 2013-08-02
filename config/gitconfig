@@ -63,6 +63,7 @@
   pr  = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
   sm  = submodule
   smu = submodule foreach git pull origin master
+  pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
 [branch]
   autosetuprebase = always
 [diff]
