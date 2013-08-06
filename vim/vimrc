@@ -83,6 +83,7 @@ NeoBundle 'mhinz/vim-startify'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'benmills/vimux'
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'thoughtbot/vim-rspec'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
