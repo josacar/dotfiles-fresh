@@ -8,6 +8,7 @@ fresh shell/\*
 
 fresh-options --file=~/.bashrc --marker=#
   fresh shell/bashrc/\*
+  fresh shell/completions/\*
   fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
