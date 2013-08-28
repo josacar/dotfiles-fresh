@@ -1,1 +1,7 @@
 set -o vi
+
+set editing-mode vi
+set keymap vi
+set convert-meta on
+
+bind -m vi-insert "\C-l":clear-screen
