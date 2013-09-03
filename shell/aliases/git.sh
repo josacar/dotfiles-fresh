@@ -188,7 +188,7 @@ function gup
   )
 }
 
-gau() {
+gauv() {
   git ls-files --other --exclude-standard -z "$@" | xargs -0 git add -Nv
 }
 
