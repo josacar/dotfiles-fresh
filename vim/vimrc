@@ -85,6 +85,7 @@ NeoBundle 'benmills/vimux'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'vim-scripts/argtextobj.vim'
+NeoBundle 'nelstrom/vim-textobj-rubyblock'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
