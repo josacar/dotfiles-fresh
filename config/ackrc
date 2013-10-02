@@ -1,0 +1,34 @@
+--smart-case
+
+--sort-files
+
+# Always color, even if piping to another program
+--color
+
+# Use my less options
+--pager=less -iqRS
+
+# Ruby
+--type-add=ruby=Rakefile,Capfile,Gemfile
+
+# JSON
+--type-set=json=.json
+--type-add=js=.json
+--type-add=yaml=.json
+
+# Conf
+--type-set=conf=.conf,.config
+
+# Markdown, Textile, Rdoc & POD
+--type-set=markdown=.markdown,.md,.mdown,.mkd,.mkdn
+--type-set=textile=.textile
+--type-set=rdoc=.rdoc
+--type-set=pod=.pod
+
+# documentation
+--type-set=documentation=.markdown,.md,.mdown,.mkd,.mkdn,.textile,.rdoc,.pod.txt
+
+# Ignore paths
+--ignore-dir=vendor
+--ignore-dir=tmp
+--ignore-dir=log
