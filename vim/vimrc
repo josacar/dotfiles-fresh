@@ -32,6 +32,16 @@ set scrolloff=3                   " Show 3 lines of context around the cursor.
 
 set title                         " Set the terminal's title
 
+if !has("gui_running") " Don't set titleold
+  set titleold=
+  if &term == "xterm" && &t_ts == ""
+    let &t_ts = "\e]2;"
+  endif
+  if &t_ts != ""
+    set title titlestring=%t%m\ -\ VIM
+  endif
+endif
+
 set visualbell                    " No beeping.
 
 set nobackup                      " Don't make a backup before overwriting a file.
