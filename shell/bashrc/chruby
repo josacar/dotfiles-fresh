@@ -1,2 +1,2 @@
 test -f /usr/local/share/chruby/chruby.sh && source /usr/local/share/chruby/chruby.sh
-text -f /usr/local/share/chruby/auto.sh && source /usr/local/share/chruby/auto.sh
+test -f /usr/local/share/chruby/auto.sh && source /usr/local/share/chruby/auto.sh
