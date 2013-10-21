@@ -97,6 +97,7 @@ NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
+NeoBundle 'dougireton/vim-chef'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
