@@ -217,3 +217,7 @@ set splitright
 
 " Don't print bufferline bar
 let g:bufferline_echo = 0
+
+" Remove trailing newline
+au BufWritePre * :set binary | set noeol
+au BufWritePost * :set nobinary | set eol
