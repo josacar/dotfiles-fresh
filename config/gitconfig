@@ -33,37 +33,43 @@
 [push]
   default = current
 [alias]
-  review = !"git log master..origin/master"
+  aa = add --all
+  add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
   am = am -3
-  st = status
-  co = checkout
-  di = diff
-  dc = diff --cached
-  ds  = diff --staged
-  dw  = diff --color-words
-  sh = show
-  ci = commit
   amend = commit --amend
   br = branch
-  ll = log --decorate -p
-  fp = format-patch
+  ci = commit
+  co = checkout
   cp = cherry-pick
-  noff = merge --no-ff
-  aa = add --all
+  dc = diff --cached
+  di = diff
+  ds  = diff --staged
+  dw  = diff --color-words
+  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; $EDITOR `f`"
   fa = fetch --all
   fapu = "!git fa && git pull"
+  fp = format-patch
   l = "!source ~/.githelpers && pretty_git_log"
   la = !git l --all
+  ll = log --decorate -p
+  log1 = log --abbrev-commit --pretty=oneline
+  logf = log --pretty=fuller
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  new = log ..@{upstream}
+  noff = merge --no-ff
+  pend = log @{upstream}..
+  pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+  pr  = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
   r = !git l -20
+  review = !"git log master..origin/master"
   rs = !git l -10
   ra = !git r --all
-  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; $EDITOR `f`"
-  add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-  # up = !git stash && git pull --rebase && git push origin `git name-rev --name-only HEAD` && git stash pop
-  pr  = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
+  st = status
+  sh = show
+  show-patch = format-patch --stdout -1
   sm  = submodule
   smu = submodule foreach git pull origin master
-  pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
 [branch]
   autosetuprebase = always
 [diff]
