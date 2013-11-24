@@ -31,3 +31,4 @@ fresh ssh/config --file=~/.ssh/config
 
 # Gemfile
 fresh Gemfile --file=~/Gemfile
+fresh Gemfile.lock --file=~/Gemfile.lock
