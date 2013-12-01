@@ -106,12 +106,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print (~> 1.2.0)
-  fancy_irb (= 0.7.3)
-  hirb (~> 0.7.1)
+  awesome_print
+  fancy_irb
+  hirb
   interactive_editor
-  pry (~> 0.9.12)
-  pry-coolline (~> 0.2.2)
-  pry-doc (~> 0.4.6)
-  pry-rails (= 0.3.2)
+  pry
+  pry-coolline
+  pry-doc
+  pry-rails
   veewee!
