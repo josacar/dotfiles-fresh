@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neobundle.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 20 Jul 2013.
+" Last Modified: 12 Dec 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -45,16 +45,15 @@ call neobundle#util#set_default(
 call neobundle#util#set_default(
       \ 'g:neobundle#default_site', 'github', 'g:neobundle_default_site')
 call neobundle#util#set_default(
-      \ 'g:neobundle#enable_tail_path', 1, 'g:neobundle_enable_tail_path')
-call neobundle#util#set_default(
       \ 'g:neobundle#enable_name_conversion', 0)
 call neobundle#util#set_default(
       \ 'g:neobundle#default_options', {})
 "}}}
 
-let s:neobundle_dir = get(
-      \ filter(split(globpath(&runtimepath, 'bundle', 1), '\n'),
-      \ 'isdirectory(v:val)'), 0, '~/.vim/bundle')
+let g:neobundle#tapped = {}
+let s:neobundle_dir = ''
+let s:neobundle_runtime_dir = neobundle#util#substitute_path_separator(
+      \ fnamemodify(expand('<sfile>'), ':p:h:h'))
 
 command! -nargs=+ NeoBundle
       \ call neobundle#parser#bundle(
@@ -69,6 +68,10 @@ command! -nargs=+ NeoBundleLazy
 
 command! -nargs=+ NeoBundleFetch
       \ call neobundle#parser#fetch(
+      \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
+
+command! -nargs=+ NeoBundleRecipe
+      \ call neobundle#parser#recipe(
       \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
 
 command! -nargs=1 -complete=dir NeoBundleLocal
@@ -127,26 +130,15 @@ command! -bar NeoBundleUpdatesLog
 command! -bar NeoBundleDirectEdit
       \ execute 'edit' fnameescape(neobundle#get_neobundle_dir()).'/direct_bundles.vim'
 
-let s:neobundle_runtime_dir = neobundle#util#substitute_path_separator(
-      \ fnamemodify(expand('<sfile>'), ':p:h:h'))
-
 function! neobundle#rc(...)
-  if a:0 > 0
-    let s:neobundle_dir = a:1
-  endif
+  let path = (a:0 > 0) ? a:1 :
+        \ get(filter(split(globpath(&runtimepath, 'bundle', 1), '\n'),
+        \ 'isdirectory(v:val)'), 0, '~/.vim/bundle')
+  return neobundle#init#_rc(path)
+endfunction
 
-  let s:neobundle_dir =
-        \ neobundle#util#substitute_path_separator(
-        \ neobundle#util#expand(s:neobundle_dir))
-  execute 'set runtimepath^='.fnameescape(
-        \ fnamemodify(neobundle#get_tags_dir(), ':h'))
-
-  augroup neobundle
-    autocmd!
-  augroup END
-
-  call neobundle#config#init()
-  call neobundle#autoload#init()
+function! neobundle#set_neobundle_dir(path)
+  let s:neobundle_dir = a:path
 endfunction
 
 function! neobundle#get_neobundle_dir()
@@ -163,6 +155,10 @@ function! neobundle#get_tags_dir()
     call mkdir(dir, 'p')
   endif
   return dir
+endfunction
+
+function! neobundle#get_rtp_dir()
+  return s:neobundle_dir . '/.neobundle'
 endfunction
 
 function! neobundle#source(bundle_names)
@@ -190,8 +186,9 @@ function! neobundle#complete_deleted_bundles(arglead, cmdline, cursorpos)
         \ 'stridx(v:val, a:arglead) == 0')
 endfunction
 
-function! neobundle#local(localdir, options)
-  return neobundle#parser#local(a:localdir, a:options)
+function! neobundle#local(localdir, ...)
+  let options = get(a:000, 0, {})
+  return neobundle#parser#local(a:localdir, options)
 endfunction
 
 function! neobundle#exists_not_installed_bundles()
@@ -200,7 +197,7 @@ endfunction
 
 function! neobundle#is_installed(...)
   return type(get(a:000, 0, [])) == type([]) ?
-        \ !empty(neobundle#_get_installed_bundles(bundle_names)) :
+        \ !empty(neobundle#_get_installed_bundles(get(a:000, 0, []))) :
         \ neobundle#config#is_installed(a:1)
 endfunction
 
@@ -232,8 +229,19 @@ function! neobundle#get_hooks(name)
   return get(neobundle#config#get(a:name), 'hooks', {})
 endfunction
 
-function! neobundle#config(name, dict)
-  return neobundle#config#set(a:name, a:dict)
+function! neobundle#tap(name) "{{{
+  let g:neobundle#tapped = neobundle#get(a:name)
+  return !empty(g:neobundle#tapped)
+endfunction"}}}
+function! neobundle#untap() "{{{
+  let g:neobundle#tapped = {}
+endfunction"}}}
+
+function! neobundle#config(arg, ...)
+  " Use neobundle#tapped or name.
+  return type(a:arg) == type({}) ?
+        \ neobundle#config#set(g:neobundle#tapped.name, a:arg) :
+        \ neobundle#config#set(a:arg, a:1)
 endfunction
 
 function! neobundle#call_hook(hook_name, ...)

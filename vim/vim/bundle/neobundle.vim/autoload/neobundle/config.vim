@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: config.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 17 Jul 2013.
+" Last Modified: 09 Dec 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -30,13 +30,18 @@ set cpo&vim
 if !exists('s:neobundles')
   let s:neobundles = {}
   let s:sourced_neobundles = {}
+  let neobundle#tapped = {}
 endif
 
 function! neobundle#config#init() "{{{
   filetype off
 
   for bundle in values(s:neobundles)
-    if bundle.resettable
+    if (!bundle.resettable && !bundle.lazy) ||
+          \ (bundle.sourced && bundle.lazy
+          \ && neobundle#is_sourced(bundle.name))
+      call neobundle#config#rtp_add(bundle)
+    elseif bundle.resettable
       " Reset.
       call neobundle#config#rtp_rm(bundle)
 
@@ -106,8 +111,8 @@ function! neobundle#config#source(names, ...) "{{{
 
   let rtps = neobundle#util#split_rtp()
   let bundles = filter(bundles,
-        \ "!neobundle#config#is_sourced(v:val.name) &&
-        \ v:val.rtp != '' && index(rtps, v:val.rtp) < 0")
+        \ "!neobundle#config#is_sourced(v:val.name) ||
+        \ (v:val.rtp != '' && index(rtps, v:val.rtp) < 0)")
   if empty(bundles)
     return
   endif
@@ -143,17 +148,16 @@ function! neobundle#config#source(names, ...) "{{{
     let bundle.dummy_mappings = []
     let bundle.dummy_commands = []
 
-    if has_key(s:neobundles, bundle.name)
-      call neobundle#config#rtp_rm(bundle)
-    endif
-
     call neobundle#config#rtp_add(bundle)
+    call neobundle#autoload#source(bundle.name)
 
     if exists('g:loaded_neobundle') || is_force
       call neobundle#call_hook('on_source', bundle)
 
       " Reload script files.
-      for directory in ['ftdetect', 'after/ftdetect', 'plugin', 'after/plugin']
+      for directory in filter(
+            \ ['ftdetect', 'after/ftdetect', 'plugin', 'after/plugin'],
+            \ "isdirectory(bundle.rtp.'/'.v:val)")
         for file in split(glob(bundle.rtp.'/'.directory.'/**/*.vim'), '\n')
           silent! source `=file`
         endfor
@@ -170,9 +174,9 @@ function! neobundle#config#source(names, ...) "{{{
 
     if !reset_ftplugin
       for filetype in split(&filetype, '\.')
-        let base = bundle.rtp . '/' . directory
         for directory in ['ftplugin', 'indent', 'syntax',
               \ 'after/ftplugin', 'after/indent', 'after/syntax']
+          let base = bundle.rtp . '/' . directory
           if filereadable(base.'/'.filetype.'.vim') ||
                 \ (directory =~# 'ftplugin$' &&
                 \   isdirectory(base . '/' . filetype) ||
@@ -281,17 +285,17 @@ function! neobundle#config#rtp_rm(bundle) "{{{
 endfunction"}}}
 
 function! neobundle#config#rtp_add(bundle) abort "{{{
+  if has_key(s:neobundles, a:bundle.name)
+    call neobundle#config#rtp_rm(s:neobundles[a:bundle.name])
+  endif
+
   let rtp = a:bundle.rtp
   if isdirectory(rtp)
-    if a:bundle.tail_path
-      " Join to the tail in runtimepath.
-      let rtps = neobundle#util#split_rtp(&runtimepath)
-      let n = index(rtps, $VIMRUNTIME)
-      let &runtimepath = neobundle#util#join_rtp(
-            \ insert(rtps, rtp, n-1), &runtimepath, rtp)
-    else
-      execute 'set rtp^='.fnameescape(rtp)
-    endif
+    " Join to the tail in runtimepath.
+    let rtps = neobundle#util#split_rtp(&runtimepath)
+    let &runtimepath = neobundle#util#join_rtp(
+          \ insert(rtps, rtp, index(rtps, neobundle#get_rtp_dir())),
+          \ &runtimepath, rtp)
   endif
   if isdirectory(rtp.'/after')
     execute 'set rtp+='.fnameescape(rtp.'/after')
@@ -347,6 +351,12 @@ function! neobundle#config#load_direct_bundles() "{{{
 endfunction"}}}
 
 function! neobundle#config#save_direct(arg) "{{{
+  if neobundle#util#is_sudo()
+    call neobundle#util#print_error(
+          \ '"sudo vim" is detected. This feature is disabled.')
+    return
+  endif
+
   let path = neobundle#get_neobundle_dir() . '/direct_bundles.vim'
   let bundles = filereadable(path) ? readfile(path) : []
   call writefile(add(bundles, 'NeoBundle ' . a:arg), path)
@@ -371,19 +381,26 @@ endfunction"}}}
 
 function! neobundle#config#add(bundle, ...) "{{{
   let bundle = a:bundle
-  let is_force = get(a:000, 0, 0)
+  let is_force = get(a:000, 0, bundle.local)
 
-  if bundle.disabled
-        \ || (!is_force && !bundle.overwrite &&
+  if (!is_force && !bundle.overwrite &&
         \     has_key(s:neobundles, bundle.name))
     return
   endif
 
   let prev_bundle = get(s:neobundles, bundle.name, {})
 
+  if get(prev_bundle, 'local', 0) && !bundle.local
+    return
+  endif
+
+  if !empty(prev_bundle)
+    call neobundle#config#rtp_rm(prev_bundle)
+  endif
   let s:neobundles[bundle.name] = bundle
 
-  if (bundle.gui && !has('gui_running'))
+  if bundle.disabled
+        \ || (bundle.gui && !has('gui_running'))
         \ || (bundle.terminal && has('gui_running'))
         \ || (bundle.vim_version != ''
         \     && s:check_version(bundle.vim_version))
@@ -408,62 +425,74 @@ function! neobundle#config#add(bundle, ...) "{{{
       " Load automatically.
       call neobundle#config#source(bundle.name)
     else
-      if bundle.sourced
-        call neobundle#config#rtp_rm(bundle)
-      endif
-
       let bundle.sourced = 1
       call neobundle#config#rtp_add(bundle)
     endif
-  elseif bundle.lazy && !neobundle#config#is_sourced(bundle.name)
-    let bundle.dummy_commands = []
-    for item in neobundle#util#convert2list(
-          \ get(bundle.autoload, 'commands', []))
-      let command = type(item) == type('') ?
-            \ { 'name' : item } : item
+  elseif bundle.lazy
+    if neobundle#config#is_sourced(bundle.name)
+      " Already sourced.
+      call neobundle#config#rtp_add(bundle)
+    else
+      let bundle.dummy_commands = []
+      for item in neobundle#util#convert2list(
+            \ get(bundle.autoload, 'commands', []))
+        let command = type(item) == type('') ?
+              \ { 'name' : item } : item
 
-      " Define dummy commands.
-      silent! execute 'command ' . (get(command, 'complete', '') != '' ?
-            \ ('-complete=' . command.complete) : '')
-            \ . ' -bang -range -nargs=*' command.name printf(
-            \ "call neobundle#autoload#command(%s, %s, <q-args>,
-            \  expand('<bang>'), expand('<line1>'), expand('<line2>'))",
-            \   string(command.name), string(bundle.name))
-      unlet item
+        " Define dummy commands.
+        silent! execute 'command ' . (get(command, 'complete', '') != '' ?
+              \ ('-complete=' . command.complete) : '')
+              \ . ' -bang -range -nargs=*' command.name printf(
+              \ "call neobundle#autoload#command(%s, %s, <q-args>,
+              \  expand('<bang>'), expand('<line1>'), expand('<line2>'))",
+              \   string(command.name), string(bundle.name))
+        unlet item
 
-      call add(bundle.dummy_commands, command.name)
-    endfor
-
-    let bundle.dummy_mappings = []
-    for item in neobundle#util#convert2list(
-          \ get(bundle.autoload, 'mappings', []))
-      if type(item) == type([])
-        let [modes, mappings] = [item[0], item[1:]]
-      else
-        let [modes, mappings] = ['nxo', [item]]
-      endif
-
-      for mapping in mappings
-        " Define dummy mappings.
-        for mode in filter(split(modes, '\zs'),
-              \ "index(['n', 'v', 'x', 'o', 'i'], v:val) >= 0")
-          silent! execute mode.'noremap <unique><silent>' mapping printf(
-                \ (mode ==# 'i' ? "\<C-o>:" : ":\<C-u>").
-                \   "call neobundle#autoload#mapping(%s, %s, %s)<CR>",
-                \   string(mapping), string(bundle.name), string(mode))
-
-          call add(bundle.dummy_mappings, [mode, mapping])
-        endfor
+        call add(bundle.dummy_commands, command.name)
       endfor
 
-      unlet item
-    endfor
+      let bundle.dummy_mappings = []
+      for item in neobundle#util#convert2list(
+            \ get(bundle.autoload, 'mappings', []))
+        if type(item) == type([])
+          let [modes, mappings] = [item[0], item[1:]]
+        else
+          let [modes, mappings] = ['nxo', [item]]
+        endif
+
+        for mapping in mappings
+          " Define dummy mappings.
+          for mode in filter(split(modes, '\zs'),
+                \ "index(['n', 'v', 'x', 'o', 'i', 'c'], v:val) >= 0")
+            silent! execute mode.'noremap <unique><silent>' mapping printf(
+                  \ (mode ==# 'c' ? "\<C-r>=" :
+                  \  (mode ==# 'i' ? "\<C-o>:" : ":\<C-u>")."call ").
+                  \   "neobundle#autoload#mapping(%s, %s, %s)<CR>",
+                  \   string(mapping), string(bundle.name), string(mode))
+
+            call add(bundle.dummy_mappings, [mode, mapping])
+          endfor
+        endfor
+
+        unlet item
+      endfor
+
+      " Load ftdetect.
+      for directory in filter(['ftdetect', 'after/ftdetect'],
+            \ "isdirectory(bundle.rtp.'/'.v:val)")
+        for file in split(glob(bundle.rtp.'/'.directory.'/**/*.vim'), '\n')
+          silent! source `=file`
+        endfor
+      endfor
+    endif
   endif
 
   if !is_force && bundle.overwrite &&
         \ !empty(prev_bundle) && prev_bundle.overwrite &&
-        \ bundle !=# prev_bundle &&
+        \ bundle.orig_arg !=# prev_bundle.orig_arg &&
         \ prev_bundle.resettable && prev_bundle.overwrite
+    " echomsg string(bundle.orig_arg)
+    " echomsg string(prev_bundle.orig_arg)
     " Warning.
     call neobundle#util#print_error(
           \ 'Overwrite previous neobundle configuration in ' . bundle.name)

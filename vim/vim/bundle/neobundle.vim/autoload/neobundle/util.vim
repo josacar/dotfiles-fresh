@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: util.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 19 Jun 2013.
+" Last Modified: 13 Dec 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -56,9 +56,18 @@ function! neobundle#util#is_cygwin() "{{{
   return s:is_cygwin
 endfunction"}}}
 
+" Sudo check.
+function! neobundle#util#is_sudo() "{{{
+  return $SUDO_USER != '' && $USER !=# $SUDO_USER
+      \ && $HOME !=# expand('~'.$USER)
+      \ && $HOME ==# expand('~'.$SUDO_USER)
+endfunction"}}}
+
 " Check vimproc. "{{{
 function! neobundle#util#has_vimproc() "{{{
-  if !exists('s:exists_vimproc')
+  if exists('g:vimproc#disable')
+    return 0
+  elseif !exists('s:exists_vimproc')
     try
       call vimproc#version()
     catch
@@ -88,7 +97,7 @@ function! neobundle#util#system(str, ...) "{{{
 
   if a:0 == 0
     let output = neobundle#util#has_vimproc() ?
-          \ vimproc#system(command) : system(command)
+          \ vimproc#system(command) : system(command, "\<C-d>")
   elseif a:0 == 1
     let output = neobundle#util#has_vimproc() ?
           \ vimproc#system(command, input) : system(command, input)
@@ -200,6 +209,10 @@ endfunction"}}}
 
 function! neobundle#util#unify_path(path) "{{{
   return fnamemodify(resolve(a:path), ':p:gs?\\\+?/?')
+endfunction"}}}
+
+function! neobundle#util#cd(path) "{{{
+  execute 'lcd' fnameescape(a:path)
 endfunction"}}}
 
 let &cpo = s:save_cpo

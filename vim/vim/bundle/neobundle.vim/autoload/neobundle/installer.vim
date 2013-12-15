@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: installer.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu at gmail.com>
-" Last Modified: 16 Jul 2013.
+" Last Modified: 13 Dec 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -35,11 +35,19 @@ call neobundle#util#set_default(
 call neobundle#util#set_default(
       \ 'g:neobundle#install_max_processes', 4,
       \ 'g:unite_source_neobundle_install_max_processes')
+call neobundle#util#set_default(
+      \ 'g:neobundle#install_process_timeout', 60)
 
 let s:log = []
 let s:updates_log = []
 
 function! neobundle#installer#install(bang, bundle_names)
+  if neobundle#util#is_sudo()
+    call neobundle#util#print_error(
+          \ '"sudo vim" is detected. This feature is disabled.')
+    return
+  endif
+
   let bundle_dir = neobundle#get_neobundle_dir()
   if !isdirectory(bundle_dir)
     call mkdir(bundle_dir, 'p')
@@ -104,6 +112,12 @@ function! neobundle#installer#install(bang, bundle_names)
 endfunction
 
 function! neobundle#installer#update(bundles)
+  if neobundle#util#is_sudo()
+    call neobundle#util#print_error(
+          \ '"sudo vim" is detected. This feature is disabled.')
+    return
+  endif
+
   call neobundle#installer#helptags(
         \ neobundle#config#get_neobundles())
   call s:reload(filter(copy(a:bundles),
@@ -113,6 +127,12 @@ function! neobundle#installer#update(bundles)
 endfunction
 
 function! neobundle#installer#helptags(bundles)
+  if neobundle#util#is_sudo()
+    call neobundle#util#print_error(
+          \ '"sudo vim" is detected. This feature is disabled.')
+    return
+  endif
+
   let help_dirs = filter(copy(a:bundles), 's:has_doc(v:val.rtp)')
 
   if !empty(help_dirs)
@@ -150,18 +170,20 @@ function! neobundle#installer#build(bundle)
   let cwd = getcwd()
   try
     if isdirectory(a:bundle.path)
-      lcd `=a:bundle.path`
+      call neobundle#util#cd(a:bundle.path)
     endif
 
-    if a:bundle.name ==# 'vimproc' && neobundle#util#is_windows()
-          \ && neobundle#util#has_vimproc()
-      let result = s:build_vimproc_dll(cmd)
-    else
-      let result = neobundle#util#system(cmd)
-    endif
+    let result = neobundle#util#system(cmd)
+  catch
+    " Build error from vimproc.
+    let message = (v:exception !~# '^Vim:')?
+          \ v:exception : v:exception . ' ' . v:throwpoint
+    call neobundle#installer#error(message)
+
+    return 1
   finally
     if isdirectory(cwd)
-      lcd `=cwd`
+      call neobundle#util#cd(cwd)
     endif
   endtry
 
@@ -174,39 +196,19 @@ function! neobundle#installer#build(bundle)
   return neobundle#util#get_last_status()
 endfunction
 
-function! s:build_vimproc_dll(cmd)
-  " Build vimproc in Windows.
-
-  " Save dll name.
-  let dll_path = exists('g:vimproc#dll_path') ?
-        \ g:vimproc#dll_path : g:vimproc_dll_path
-
-  " Rename dll.
-  let temp = tempname()
-  call rename(dll_path, temp)
-
-  " Note: Can't use vimproc function.
-  let result = system(a:cmd)
-
-  if filereadable(dll_path)
-    " Updated. Delete previous dll.
-    call delete(temp)
-  else
-    " Didn't updated. Restore it.
-    call rename(temp, dll_path)
+function! neobundle#installer#clean(bang, ...)
+  if neobundle#util#is_sudo()
+    call neobundle#util#print_error('"sudo vim" is detected. This feature is disabled.')
+    return
   endif
 
-  return result
-endfunction
-
-function! neobundle#installer#clean(bang, ...)
-  let bundle_dirs = map(copy(neobundle#config#get_neobundles()),
-        \ "(v:val.script_type != '') ?
-        \  v:val.base . '/' . v:val.directory : v:val.path")
-  let all_dirs = filter(split(neobundle#util#substitute_path_separator(
-        \ globpath(neobundle#get_neobundle_dir(), '*', 1)), "\n"),
-        \ 'isdirectory(v:val)')
   if get(a:000, 0, '') == ''
+    let all_dirs = filter(split(neobundle#util#substitute_path_separator(
+          \ globpath(neobundle#get_neobundle_dir(), '*', 1)), "\n"),
+          \ 'isdirectory(v:val)')
+    let bundle_dirs = map(copy(neobundle#config#get_neobundles()),
+          \ "(v:val.script_type != '') ?
+          \  v:val.base . '/' . v:val.directory : v:val.path")
     let x_dirs = filter(all_dirs,
           \ "!neobundle#config#is_installed(fnamemodify(v:val, ':t'))
           \ && index(bundle_dirs, v:val) < 0 && v:val !~ '/neobundle.vim$'")
@@ -264,7 +266,7 @@ function! neobundle#installer#reinstall(bundles)
           \ printf('[neobundle/install] |%s| Reinstalling...', bundle.name))
 
     " Save info.
-    let arg = bundle.orig_arg
+    let arg = copy(bundle.orig_arg)
 
     " Remove.
     call neobundle#installer#clean(1, bundle.name)
@@ -354,13 +356,13 @@ function! neobundle#installer#get_revision_number(bundle)
       return ''
     endif
 
-    lcd `=a:bundle.path`
+    call neobundle#util#cd(a:bundle.path)
 
     return neobundle#util#system(
           \ type.get_revision_number_command(a:bundle))
   finally
     if isdirectory(cwd)
-      lcd `=cwd`
+      call neobundle#util#cd(cwd)
     endif
   endtry
 
@@ -377,13 +379,13 @@ function! s:get_commit_date(bundle)
       return 0
     endif
 
-    lcd `=a:bundle.path`
+    call neobundle#util#cd(a:bundle.path)
 
     return neobundle#util#system(
           \ type.get_commit_date_command(a:bundle))
   finally
     if isdirectory(cwd)
-      lcd `=cwd`
+      call neobundle#util#cd(cwd)
     endif
   endtry
 
@@ -396,7 +398,7 @@ function! neobundle#installer#get_updated_log_message(bundle, new_rev, old_rev)
     let type = neobundle#config#get_types(a:bundle.type)
 
     if isdirectory(a:bundle.path)
-      lcd `=a:bundle.path`
+      call neobundle#util#cd(a:bundle.path)
     endif
 
     let log_command = has_key(type, 'get_log_command') ?
@@ -406,7 +408,7 @@ function! neobundle#installer#get_updated_log_message(bundle, new_rev, old_rev)
     return log != '' ? log : printf('%s -> %s', a:old_rev, a:new_rev)
   finally
     if isdirectory(cwd)
-      lcd `=cwd`
+      call neobundle#util#cd(cwd)
     endif
   endtry
 endfunction
@@ -459,7 +461,7 @@ function! neobundle#installer#sync(bundle, context, is_unite)
   try
     if isdirectory(a:bundle.path)
       " Cd to bundle path.
-      lcd `=a:bundle.path`
+      call neobundle#util#cd(a:bundle.path)
     endif
 
     let rev = neobundle#installer#get_revision_number(a:bundle)
@@ -471,6 +473,7 @@ function! neobundle#installer#sync(bundle, context, is_unite)
           \ 'output' : '',
           \ 'status' : -1,
           \ 'eof' : 0,
+          \ 'start_time' : localtime(),
           \ }
     if neobundle#util#has_vimproc()
       let process.proc = vimproc#pgroup_open(vimproc#util#iconv(
@@ -485,7 +488,7 @@ function! neobundle#installer#sync(bundle, context, is_unite)
     endif
   finally
     if isdirectory(cwd)
-      lcd `=cwd`
+      call neobundle#util#cd(cwd)
     endif
   endtry
 
@@ -494,16 +497,18 @@ endfunction
 
 function! neobundle#installer#check_output(context, process, is_unite)
   if neobundle#util#has_vimproc()
+    let is_timeout = (localtime() - a:process.start_time)
+          \             >= g:neobundle#install_process_timeout
     let a:process.output .= vimproc#util#iconv(
           \ a:process.proc.stdout.read(-1, 300), 'char', &encoding)
-    if !a:process.proc.stdout.eof
+    if !a:process.proc.stdout.eof && !is_timeout
       return
     endif
-
     call a:process.proc.stdout.close()
 
     let [_, status] = a:process.proc.waitpid()
   else
+    let is_timeout = 0
     let status = a:process.status
   endif
 
@@ -522,15 +527,17 @@ function! neobundle#installer#check_output(context, process, is_unite)
   let updated_time = s:get_commit_date(bundle)
   let bundle.checked_time = localtime()
 
-  if status && a:process.rev ==# rev
-        \ && (bundle.type !=# 'git' ||
-        \     a:process.output !~# 'up-to-date\|up to date')
+  if is_timeout
+        \ || (status && a:process.rev ==# rev
+        \     && (bundle.type !=# 'git' ||
+        \     a:process.output !~# 'up-to-date\|up to date'))
     let message = printf('[neobundle/install] (%'.len(max).'d/%d): |%s| %s',
           \ num, max, bundle.name, 'Error')
     call neobundle#installer#log(message, a:is_unite)
     call neobundle#installer#error(bundle.path, a:is_unite)
     call neobundle#installer#error(
-          \ split(a:process.output, '\n'), a:is_unite)
+          \ (is_timeout ? 'Process timeout.' :
+          \    split(a:process.output, '\n')), a:is_unite)
     call add(a:context.source__errored_bundles,
           \ bundle)
   elseif a:process.rev ==# rev
@@ -604,14 +611,14 @@ function! neobundle#installer#lock_revision(process, context, is_unite)
   try
     if isdirectory(bundle.path)
       " Cd to bundle path.
-      lcd `=bundle.path`
+      call neobundle#util#cd(bundle.path)
     endif
 
     let result = neobundle#util#system(cmd)
     let status = neobundle#util#get_last_status()
   finally
     if isdirectory(cwd)
-      lcd `=cwd`
+      call neobundle#util#cd(cwd)
     endif
   endtry
 
@@ -689,9 +696,9 @@ function! s:update_tags()
 endfunction
 
 function! s:update_ftdetect()
-  let bundles = filter(neobundle#config#get_neobundles(), 'v:val.lazy')
-  call s:copy_bundle_files(bundles, 'ftdetect')
-  call s:copy_bundle_files(bundles, 'after/ftdetect')
+  " Delete old files.
+  call s:cleandir('ftdetect')
+  call s:cleandir('after/ftdetect')
 endfunction
 
 function! s:copy_bundle_files(bundles, directory)
@@ -884,13 +891,6 @@ function! s:reload(bundles) "{{{
 
   call filter(copy(a:bundles), 'neobundle#config#rtp_add(v:val)')
 
-  " Delete old g:loaded_xxx variables.
-  for var_name in keys(g:)
-    if var_name =~ '^loaded_'
-      execute 'unlet!' var_name
-    endif
-  endfor
-
   " Call hooks.
   call neobundle#call_hook('on_source', a:bundles)
 
@@ -898,24 +898,6 @@ function! s:reload(bundles) "{{{
   silent! runtime! after/ftdetect/**/*.vim
   silent! runtime! plugin/**/*.vim
   silent! runtime! after/plugin/**/*.vim
-
-  " Reload autoload scripts.
-  let scripts = []
-  for line in split(s:redir('scriptnames'), "\n")
-    let name = matchstr(line, '^\s*\d\+:\s\+\zs.\+\ze\s*$')
-    if name != '' && name =~ '/autoload/'
-          \ && name !~ '/unite\%(\.vim\)\?/\|/neobundle\%(\.vim\)\?/'
-          \ && filereadable(neobundle#util#unify_path(name))
-      call add(scripts, neobundle#util#unify_path(name))
-    endif
-  endfor
-
-  for script in scripts
-    for bundle in filter(copy(a:bundles),
-          \ 'stridx(script, v:val.path) >= 0')
-      silent! execute source `=script`
-    endfor
-  endfor
 
   " Call hooks.
   call neobundle#call_hook('on_post_source', a:bundles)
