@@ -99,6 +99,8 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'dougireton/vim-chef'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'junkblocker/patchreview-vim'
+NeoBundle 'codegram/vim-codereview'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
