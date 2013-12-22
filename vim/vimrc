@@ -101,6 +101,7 @@ NeoBundle 'dougireton/vim-chef'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'junkblocker/patchreview-vim'
 NeoBundle 'codegram/vim-codereview'
+NeoBundle 'elzr/vim-json'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
