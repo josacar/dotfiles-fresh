@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/jedi4ever/veewee
-  revision: cbd9ed31fd58012d70ccf9815c3af001feb129d8
+  revision: 0bdb49025a0453457a2920df30819955127d0bb0
   specs:
     veewee (0.3.12)
       ansi (~> 1.3.0)
