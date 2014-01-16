@@ -231,3 +231,6 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign with a Vim movement
 nmap <Leader>a <Plug>(EasyAlign)
+
+" Store notes on Documents by default
+let g:notes_directories = ['~/Documents/Notes']
