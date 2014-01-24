@@ -35,3 +35,6 @@ fresh Gemfile.lock --file=~/Gemfile.lock
 
 # Bundler
 fresh bundle/config --file=~/.bundle/config
+
+# Brewfile
+fresh Brewfile --file=~/Brewfile
