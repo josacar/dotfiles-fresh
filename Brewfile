@@ -1,8 +1,11 @@
 install ack
+install brew-cask
+install chruby
+install heroku-toolbelt
+install htop-osx
 install git
 install mtr
 install pstree
-install youtube-dl
-install brew-cask
-install rbenv
+install ruby-build
 install tmux
+install youtube-dl
