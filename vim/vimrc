@@ -108,6 +108,7 @@ NeoBundle 'junkblocker/patchreview-vim'
 NeoBundle 'codegram/vim-codereview'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'moll/vim-bbye'
+NeoBundle 'AndrewRadev/splitjoin.vim'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
@@ -234,6 +235,10 @@ let g:bufferline_echo = 0
 " Remove trailing newline
 au BufWritePre * :set binary | set noeol
 au BufWritePost * :set nobinary | set eol
+
+" SplitJoin plugin
+nmap sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>
 
 " Start interactive EasyAlign in visual mode
 vmap <Enter> <Plug>(EasyAlign)
