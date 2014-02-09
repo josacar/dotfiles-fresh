@@ -9,3 +9,4 @@ install pstree
 install ruby-build
 install tmux
 install youtube-dl
+install axel
