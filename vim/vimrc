@@ -36,7 +36,7 @@ set title                         " Set the terminal's title
 set lazyredraw                    " redraw only when we need to."
 set showmatch                     " highlight matching [{()}]"
 
-if !has("gui_running") " Don't set titleold
+if !has("gui_running")            " Don't set titleold
   set titleold=
   if &term == "xterm" && &t_ts == ""
     let &t_ts = "\e]2;"
@@ -46,20 +46,20 @@ if !has("gui_running") " Don't set titleold
   endif
 endif
 
-set visualbell                    " No beeping.
+set visualbell                        " No beeping.
 
-set nobackup                      " Don't make a backup before overwriting a file.
-set nowritebackup                 " And again.
-set directory=$HOME/.vim/tmp      " Keep swap files in one location
-set backupdir=$HOME/.vim/_backup  " where to put backup files.
+set nobackup                          " Don't make a backup before overwriting a file.
+set nowritebackup                     " And again.
+set directory=$HOME/.vim-tmp/tmp      " Keep swap files in one location
+set backupdir=$HOME/.vim-tmp/_backup  " where to put backup files.
 
-set tabstop=2                     " Global tab width.
-set shiftwidth=2                  " And again, related.
-set expandtab                     " Use spaces instead of tabs
-set laststatus=2                  " Show the status line all the time
+set tabstop=2                         " Global tab width.
+set shiftwidth=2                      " And again, related.
+set expandtab                         " Use spaces instead of tabs
+set laststatus=2                      " Show the status line all the time
 set listchars=tab:▸\ ,eol:¬
-"set list                          " Show invisible characters
-"set cursorline                    " Show cursor line.
+"set list                             " Show invisible characters
+"set cursorline                       " Show cursor line.
 
 
 if has('vim_starting')
