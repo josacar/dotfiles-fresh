@@ -233,8 +233,8 @@ set splitright
 let g:bufferline_echo = 0
 
 " Remove trailing newline
-au BufWritePre * :set binary | set noeol
-au BufWritePost * :set nobinary | set eol
+"au BufWritePre * :set binary | set noeol
+"au BufWritePost * :set nobinary | set eol
 
 " SplitJoin plugin
 nmap sj :SplitjoinSplit<cr>
