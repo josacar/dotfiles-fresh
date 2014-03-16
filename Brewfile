@@ -1,7 +1,5 @@
 install ack
 install axel
-tap phinze/cask
-install brew-cask
 install chruby
 install git
 install heroku-toolbelt
@@ -11,3 +9,29 @@ install pstree
 install ruby-build
 install tmux
 install youtube-dl
+
+tap phinze/cask
+install brew-cask
+cask adium
+cask alfred
+cask clementine
+cask cord
+cask cyberduck
+cask diffmerge
+cask filezilla
+cask google-chrome
+cask google-hangouts
+cask heroku-toolbelt
+cask iterm2
+cask menumeters
+cask osxfuse
+cask propane
+cask sequel-pro
+cask skype
+cask the-unarchiver
+cask trim-enabler
+cask tunnelblick
+cask vagrant
+cask virtualbox
+cask vlc
+cask xquartz
