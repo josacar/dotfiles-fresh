@@ -1,12 +1,13 @@
 install ack
+install axel
+tap phinze/cask
 install brew-cask
 install chruby
+install git
 install heroku-toolbelt
 install htop-osx
-install git
 install mtr
 install pstree
 install ruby-build
 install tmux
 install youtube-dl
-install axel
