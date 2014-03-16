@@ -219,7 +219,7 @@ let g:airline_powerline_fonts=1
 " Don't autosave/load sessions
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
-j
+
 " vim-rspec mappings
 nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>s :call RunNearestSpec()<CR>
