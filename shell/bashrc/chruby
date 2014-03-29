@@ -1,2 +1,6 @@
 test -f /usr/local/share/chruby/chruby.sh && source /usr/local/share/chruby/chruby.sh
 test -f /usr/local/share/chruby/auto.sh && source /usr/local/share/chruby/auto.sh
+
+install_chruby_ruby(){
+  RUBY_CONFIGURE_OPTS='--disable-install-doc' ruby-build $1 ~/.rubies/$1
+}
