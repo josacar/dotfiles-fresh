@@ -34,6 +34,8 @@ alias gfa='git fa'
 alias ggpull='git pull --rebase origin $(git_current_branch)'
 alias ggpush='git push origin $(git_current_branch)'
 
+alias ghpull='git pull --rebase heroku $(git_current_branch)'
+alias ghpush='git push heroku $(git_current_branch)'
 
 # helper for git aliases
 function git_current_branch()
