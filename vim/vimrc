@@ -181,10 +181,6 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" move to beginning/end of line
-nnoremap B ^
-nnoremap E $"
-
 " Aliases for some typos
 command WQ wq
 command Wq wq
