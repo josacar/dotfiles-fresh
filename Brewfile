@@ -12,26 +12,26 @@ install youtube-dl
 
 tap phinze/cask
 install brew-cask
-cask adium
-cask alfred
-cask clementine
-cask cord
-cask cyberduck
-cask diffmerge
-cask filezilla
-cask google-chrome
-cask google-hangouts
-cask heroku-toolbelt
-cask iterm2
-cask menumeters
-cask osxfuse
-cask propane
-cask sequel-pro
-cask skype
-cask the-unarchiver
-cask trim-enabler
-cask tunnelblick
-cask vagrant
-cask virtualbox
-cask vlc
-cask xquartz
+cask install adium
+cask install alfred
+cask install clementine
+cask install cord
+cask install cyberduck
+cask install diffmerge
+cask install filezilla
+cask install google-chrome
+cask install google-hangouts
+cask install heroku-toolbelt
+cask install iterm2
+cask install menumeters
+cask install osxfuse
+cask install propane
+cask install sequel-pro
+cask install skype
+cask install the-unarchiver
+cask install trim-enabler
+cask install tunnelblick
+cask install vagrant
+cask install virtualbox
+cask install vlc
+cask install xquartz
