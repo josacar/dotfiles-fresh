@@ -210,7 +210,47 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
 " Use poweline fonts in airline
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep = ' ' " No >
+let g:airline_right_sep = ' ' " No <
+let g:airline_detect_modified = 1 " enable modified detection
+let g:airline_detect_paste = 1 " enable paste detection
+" airline-branch : fugitive.vim
+let g:airline#extensions#branch#enabled = 0
+" airline-hunks : vim-signify or vim-gitgutter
+let g:airline#extensions#hunks#enabled = 0
+" airline-tabline : Top buffer bar
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#tab_nr_type = 0
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_format = '%s '
+let g:airline#extensions#tabline#fnamemod = ':p:.'
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#tab_min_count = 0
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+
+" Override some sections
+function AirlineInit()
+  let spc = g:airline_symbols.space
+  let g:airline_section_a = airline#section#create_left(['mode', 'paste', 'iminsert'])
+  let g:airline_section_b = airline#section#create(['hunks', 'branch'])
+  let g:airline_section_c = airline#section#create(['%<', 'file', spc, 'readonly'])
+  let g:airline_section_gutter = airline#section#create(['%='])
+  let g:airline_section_x = '' " airline#section#create_right(['tagbar', 'filetype'])
+  let g:airline_section_y = '' " airline#section#create_right(['ffenc'])
+  let g:airline_section_z = airline#section#create(['%3p%%'.spc, 'linenr', ':%3c '])
+  let g:airline_section_warning = airline#section#create(['syntastic', 'eclim', 'whitespace'])
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+" INSERT to NORMAL timeout
+set ttimeoutlen=50
 
 " Don't autosave/load sessions
 let g:session_autosave = 'no'
