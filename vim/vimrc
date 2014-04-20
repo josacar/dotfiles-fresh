@@ -2,7 +2,6 @@ set encoding=utf-8
 set nocompatible                  " Must come first because it changes other options.
 set background=dark
 
-
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
 
@@ -109,6 +108,7 @@ NeoBundle 'codegram/vim-codereview'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'moll/vim-bbye'
 NeoBundle 'AndrewRadev/splitjoin.vim'
+NeoBundle 'edkolev/tmuxline.vim'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
