@@ -117,7 +117,7 @@ NeoBundle 'edkolev/tmuxline.vim' " Simple tmux statusline generator
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
-set autoread                     " Update open files when changed externally
+" set autoread                     " Update open files when changed externally
 
 " Or use vividchalk
 set t_Co=256
