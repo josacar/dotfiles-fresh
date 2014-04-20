@@ -86,7 +86,7 @@ NeoBundle 'scrooloose/nerdtree' " A tree explorer
 NeoBundle 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 NeoBundle 'godlygeek/tabular' " text filtering and alignment
 NeoBundle 'bling/vim-airline' " lean & mean status/tabline for vim that's light as air
-NeoBundle 'bling/vim-bufferline' " show the list of buffers in the command bar
+" NeoBundle 'bling/vim-bufferline' " show the list of buffers in the command bar
 " NeoBundle 'tpope/vim-bundler' " Lightweight support for Ruby's Bundler
 NeoBundle 'tpope/vim-commentary' " comment stuff out
 NeoBundle 'tpope/vim-endwise' " wisely add 'end' in ruby, endfunction/endif/more
@@ -97,7 +97,8 @@ NeoBundle 'xolox/vim-notes' " Easy note taking in Vim
 " NeoBundle 'tpope/vim-rake' " rake wrapper
 NeoBundle 'vim-ruby/vim-ruby' " Vim/Ruby Configuration Files
 NeoBundle 'xolox/vim-session' " Extended session management for Vim
-NeoBundle 'mhinz/vim-signify' " Show a VCS diff using Vim's sign column
+" NeoBundle 'mhinz/vim-signify' " Show a VCS diff using Vim's sign column
+NeoBundle 'airblade/vim-gitgutter' " A Vim plugin which shows a git diff in the sign-column
 NeoBundle 'mhinz/vim-startify' " A fancy start screen for Vim.
 NeoBundle 'tpope/vim-surround' " quoting/parenthesizing made simple
 NeoBundle 'benmills/vimux' " interact with tmux
@@ -122,6 +123,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 " Or use vividchalk
 set t_Co=256
 colorscheme vividchalk
+highlight clear SignColumn
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -221,9 +223,9 @@ let g:airline_right_sep = ' ' " No <
 let g:airline_detect_modified = 1 " enable modified detection
 let g:airline_detect_paste = 1 " enable paste detection
 " airline-branch : fugitive.vim
-let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#branch#enabled = 1
 " airline-hunks : vim-signify or vim-gitgutter
-let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#hunks#enabled = 1
 " airline-tabline : Top buffer bar
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
