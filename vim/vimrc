@@ -243,18 +243,15 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 
 " Override some sections
-function AirlineInit()
-  let spc = g:airline_symbols.space
-  let g:airline_section_a = airline#section#create_left(['mode', 'paste', 'iminsert'])
-  let g:airline_section_b = airline#section#create(['hunks', 'branch'])
-  let g:airline_section_c = airline#section#create(['%<', 'file', spc, 'readonly'])
-  let g:airline_section_gutter = airline#section#create(['%='])
-  let g:airline_section_x = '' " airline#section#create_right(['tagbar', 'filetype'])
-  let g:airline_section_y = '' " airline#section#create_right(['ffenc'])
-  let g:airline_section_z = airline#section#create(['%3p%%'.spc, 'linenr', ':%3c '])
-  let g:airline_section_warning = airline#section#create(['syntastic', 'eclim', 'whitespace'])
-endfunction
-autocmd VimEnter * call AirlineInit()
+" let spc = ' '
+" let g:airline_section_a = airline#section#create_left(['mode', 'paste', 'iminsert'])
+" let g:airline_section_b = airline#section#create(['hunks', 'branch'])
+" let g:airline_section_c = airline#section#create(['%<', 'file', spc, 'readonly'])
+" let g:airline_section_gutter = airline#section#create(['%='])
+let g:airline_section_x = '' " airline#section#create_right(['tagbar', 'filetype'])
+let g:airline_section_y = '' " airline#section#create_right(['ffenc'])
+" let g:airline_section_z = airline#section#create(['%3p%%'.spc, 'linenr', ':%3c '])
+" let g:airline_section_warning = airline#section#create(['syntastic', 'eclim', 'whitespace'])
 
 " INSERT to NORMAL timeout
 set ttimeoutlen=50
