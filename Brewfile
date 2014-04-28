@@ -9,6 +9,8 @@ install pstree
 install ruby-build
 install tmux
 install youtube-dl
+install wakeonlan
+install ssh-copy-id
 
 tap phinze/cask
 install brew-cask
