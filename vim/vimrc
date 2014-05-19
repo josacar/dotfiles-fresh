@@ -114,7 +114,7 @@ NeoBundle 'codegram/vim-codereview' " GitHub Pull Request-based Code Reviews
 NeoBundle 'elzr/vim-json' " A better JSON for Vim
 NeoBundle 'moll/vim-bbye' " Delete buffers and close files in Vim without closing your windows
 NeoBundle 'AndrewRadev/splitjoin.vim' " simplifies the transition between multiline and single-line code
-NeoBundle 'edkolev/tmuxline.vim' " Simple tmux statusline generator
+" NeoBundle 'edkolev/tmuxline.vim' " Simple tmux statusline generator
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
