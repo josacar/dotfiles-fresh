@@ -282,12 +282,6 @@ let g:bufferline_echo = 0
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
-" Start interactive EasyAlign in visual mode
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign with a Vim movement
-nmap <Leader>a <Plug>(EasyAlign)
-
 " Store notes on Documents by default
 let g:notes_directories = ['~/Documents/Notes']
 
