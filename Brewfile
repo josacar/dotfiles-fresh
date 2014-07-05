@@ -12,6 +12,7 @@ install youtube-dl
 install wakeonlan
 install ssh-copy-id
 install httpie
+install the_silver_searcher
 
 tap phinze/cask
 install brew-cask
