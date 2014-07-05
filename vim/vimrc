@@ -79,7 +79,7 @@ NeoBundle 'Shougo/vimproc', {
     \    },
     \ } " Interactive command execution in Vim
 NeoBundle 'mileszs/ack.vim' " Vim plugin for Ack
-NeoBundle 'ggreer/the_silver_searcher' " VIm plugin for the_silver_searcher
+NeoBundle 'rking/ag.vim' " VIm plugin for the_silver_searcher
 NeoBundle 'kien/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, finder for Vim
 NeoBundle 'Raimondi/delimitMate' " insert mode auto-completion for quotes, parens, brackets
 NeoBundle 'mattn/gist-vim' " creating gists
