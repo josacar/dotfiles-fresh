@@ -14,6 +14,7 @@ install ssh-copy-id
 install httpie
 install the_silver_searcher
 install shellcheck
+install go
 
 tap phinze/cask
 install brew-cask
