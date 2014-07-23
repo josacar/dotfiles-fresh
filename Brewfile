@@ -42,4 +42,7 @@ cask install virtualbox
 cask install vlc
 cask install xquartz
 
+brew tap fnichol/dvm
+brew install dvm
+
 cask alfred link
