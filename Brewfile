@@ -41,3 +41,5 @@ cask install vagrant
 cask install virtualbox
 cask install vlc
 cask install xquartz
+
+cask alfred link
