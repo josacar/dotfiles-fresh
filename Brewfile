@@ -15,6 +15,7 @@ install httpie
 install the_silver_searcher
 install shellcheck
 install go
+install mercurial
 
 tap phinze/cask
 install brew-cask
