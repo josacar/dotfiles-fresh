@@ -58,7 +58,7 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|screen-256color)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -107,3 +107,5 @@ fi
 for dir in tmp _backup; do
   [ ! -d $HOME/.vim-tmp/$dir ] && mkdir -p $HOME/.vim-tmp/$dir
 done
+
+export TERM='screen-256color'
