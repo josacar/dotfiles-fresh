@@ -260,3 +260,6 @@ let g:vim_markdown_folding_disabled=1
 
 " reload vim config
 nnoremap <Leader>r :so $MYVIMRC<CR>
+
+" support ack 1.x
+let g:ack_default_options=" -H --nocolor --nogroup --column"
