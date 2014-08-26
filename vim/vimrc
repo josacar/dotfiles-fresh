@@ -263,3 +263,6 @@ nnoremap <Leader>r :so $MYVIMRC<CR>
 
 " support ack 1.x
 let g:ack_default_options=" -H --nocolor --nogroup --column"
+
+" disable go autoinstall
+let g:go_disable_autoinstall = 1
