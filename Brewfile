@@ -42,6 +42,7 @@ cask install vagrant
 cask install virtualbox
 cask install vlc
 cask install xquartz
+cask install chefdk
 
 brew tap fnichol/dvm
 brew install dvm
