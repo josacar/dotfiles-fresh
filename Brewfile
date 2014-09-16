@@ -44,7 +44,7 @@ cask install vlc
 cask install xquartz
 cask install chefdk
 
-brew tap fnichol/dvm
-brew install dvm
+tap fnichol/dvm
+install dvm
 
 cask alfred link
