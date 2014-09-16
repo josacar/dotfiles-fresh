@@ -44,6 +44,7 @@ cask install vlc
 cask install xquartz
 cask install chefdk
 cask install karabiner
+cask install dropbox
 
 tap fnichol/dvm
 install dvm
