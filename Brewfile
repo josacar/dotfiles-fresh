@@ -43,6 +43,7 @@ cask install virtualbox
 cask install vlc
 cask install xquartz
 cask install chefdk
+cask install karabiner
 
 tap fnichol/dvm
 install dvm
