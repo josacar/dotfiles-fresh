@@ -2,7 +2,7 @@ which rbenv >/dev/null
 
 if [ $? -eq 0 ]; then
   install_ruby_version(){
-    RUBY_CONFIGURE_OPTS='--disable-install-doc' rbenv-install $1
+    RUBY_CONFIGURE_OPTS='--disable-install-doc' rbenv install $1
   }
   eval "$(rbenv init -)"
 fi
