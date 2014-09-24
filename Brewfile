@@ -46,6 +46,8 @@ cask install chefdk
 cask install karabiner
 cask install dropbox
 cask install firefox
+cask install textmate
+cask install macvim
 
 tap fnichol/dvm
 install dvm
