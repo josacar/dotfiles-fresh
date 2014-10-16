@@ -9,6 +9,7 @@ install httpie
 install htop-osx
 install mercurial
 install mtr
+install nmap
 install pstree
 install ruby-build
 install shellcheck
