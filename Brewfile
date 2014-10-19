@@ -13,6 +13,7 @@ install nmap
 install pstree
 install ruby-build
 install shellcheck
+install sqlmap
 install ssh-copy-id
 install the_silver_searcher
 install tmux
