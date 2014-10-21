@@ -53,6 +53,7 @@ cask install vagrant
 cask install virtualbox
 cask install vlc
 cask install xquartz
+cask install spectacle
 
 tap fnichol/dvm
 install dvm
