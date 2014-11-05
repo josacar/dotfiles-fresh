@@ -75,6 +75,9 @@ cask install vlc
 cask install xee
 cask install xquartz
 
+brew tap caskroom/versions
+cask install google-chrome-canary
+
 tap fnichol/dvm
 install dvm
 
