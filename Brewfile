@@ -45,11 +45,9 @@ cask install cyberduck
 cask install diffmerge
 cask install dropbox
 cask install filezilla
-cask install firefox
 cask install jitsi
 cask install karabiner
 cask install gitx
-cask install google-chrome
 cask install google-drive
 cask install google-hangouts
 cask install gpgtools
@@ -79,6 +77,10 @@ cask install xquartz
 
 tap fnichol/dvm
 install dvm
+
+brew tap caskroom/versions
+cask install google-chrome-beta
+cask install firefox-beta
 
 cask alfred link
 
