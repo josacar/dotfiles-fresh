@@ -78,7 +78,7 @@ cask install xquartz
 tap fnichol/dvm
 install dvm
 
-brew tap caskroom/versions
+tap caskroom/versions
 cask install google-chrome-beta
 cask install firefox-beta
 
