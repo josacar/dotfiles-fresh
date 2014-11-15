@@ -4,7 +4,7 @@ upgrade
 install coreutils
 install moreutils
 install findutils
-install gnu-sed --default-names
+install gnu-sed --with-default-names
 
 install ack
 install axel
