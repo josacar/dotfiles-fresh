@@ -49,7 +49,12 @@ install_brew(){
   fi
 }
 
+install_vim_bundle(){
+  vim +NeoBundleInstall +qall
+}
+
 # fresh hook
 fresh_after_build(){
   install_brew
+  install_vim_bundle
 }
