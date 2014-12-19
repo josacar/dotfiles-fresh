@@ -53,8 +53,13 @@ install_vim_bundle(){
   vim +NeoBundleInstall +qall
 }
 
+install_chefdk_extra_gems(){
+  chef gem install knife-spec
+}
+
 # fresh hook
 fresh_after_build(){
   install_brew
   install_vim_bundle
+  install_chefdk_extra_gems
 }
