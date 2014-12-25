@@ -2,9 +2,11 @@ which rbenv >/dev/null
 
 if [ $? -eq 0 ]; then
   install_ruby_version(){
-    cd $HOME/.rbenv/plugins/ruby-build
-    git fetch -q && git pull -q
-    cd $OLDPWD
+    if [ -d $HOME/.rbenv/plugins/ruby-build ]; then
+      cd $HOME/.rbenv/plugins/ruby-build
+      git fetch -q && git pull -q
+      cd $OLDPWD
+    fi
 
     RUBY_CONFIGURE_OPTS='--disable-install-doc' rbenv install $1
   }
