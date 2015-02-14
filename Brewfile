@@ -13,6 +13,7 @@ install git
 install gpg
 install go
 install heroku-toolbelt
+install hh
 install httpie
 install htop-osx
 install mercurial
