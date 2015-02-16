@@ -1,88 +1,81 @@
-update
-upgrade
+brew 'coreutils'
+brew 'moreutils'
+brew 'findutils'
+brew 'gnu-sed', args: ['--with-default-names']
 
-install coreutils
-install moreutils
-install findutils
-install gnu-sed --with-default-names
+brew 'ack'
+brew 'axel'
+brew 'chruby'
+brew 'git'
+brew 'gpg'
+brew 'go'
+brew 'heroku-toolbelt'
+brew 'hh'
+brew 'httpie'
+brew 'htop-osx'
+brew 'mercurial'
+brew 'mtr'
+brew 'nmap'
+brew 'pstree'
+brew 'pv'
+brew 'ruby-build'
+brew 'shellcheck'
+brew 'sqlmap'
+brew 'ssh-copy-id'
+brew 'the_silver_searcher'
+brew 'tmux'
+brew 'tree'
+brew 'wakeonlan'
+brew 'wget'
+brew 'youtube-dl'
 
-install ack
-install axel
-install chruby
-install git
-install gpg
-install go
-install heroku-toolbelt
-install hh
-install httpie
-install htop-osx
-install mercurial
-install mtr
-install nmap
-install pstree
-install pv
-install ruby-build
-install shellcheck
-install sqlmap
-install ssh-copy-id
-install the_silver_searcher
-install tmux
-install tree
-install wakeonlan
-install wget
-install youtube-dl
+tap 'phinze/cask'
+brew 'brew-cask'
+cask 'adium'
+cask 'android-file-transfer'
+cask 'alfred'
+cask 'bittorrent-sync'
+cask 'clementine'
+cask 'chefdk'
+cask 'chicken'
+cask 'cord'
+cask 'cyberduck'
+cask 'diffmerge'
+cask 'dropbox'
+cask 'filezilla'
+cask 'jitsi'
+cask 'karabiner'
+cask 'gitx'
+cask 'google-drive'
+cask 'google-hangouts'
+cask 'gpgtools'
+cask 'heroku-toolbelt'
+cask 'iterm2'
+cask 'libreoffice'
+cask 'licecap'
+cask 'macdown'
+cask 'macvim'
+cask 'menumeters'
+cask 'osxfuse'
+cask 'sequel-pro'
+cask 'slack'
+cask 'skype'
+cask 'sonora'
+cask 'spectacle'
+cask 'textmate'
+cask 'the-unarchiver'
+cask 'tomahawk'
+cask 'trim-enabler'
+cask 'tunnelblick'
+cask 'vagrant'
+cask 'virtualbox'
+cask 'vlc'
+cask 'xee'
+cask 'xquartz'
 
-tap phinze/cask
-install brew-cask
-cask install adium
-cask install android-file-transfer
-cask install alfred
-cask install bittorrent-sync
-cask install clementine
-cask install chefdk
-cask install chicken
-cask install cord
-cask install cyberduck
-cask install diffmerge
-cask install dropbox
-cask install filezilla
-cask install jitsi
-cask install karabiner
-cask install gitx
-cask install google-drive
-cask install google-hangouts
-cask install gpgtools
-cask install heroku-toolbelt
-cask install iterm2
-cask install libreoffice
-cask install licecap
-cask install macdown
-cask install macvim
-cask install menumeters
-cask install osxfuse
-cask install sequel-pro
-cask install slack
-cask install skype
-cask install sonora
-cask install spectacle
-cask install textmate
-cask install the-unarchiver
-cask install tomahawk
-cask install trim-enabler
-cask install tunnelblick
-cask install vagrant
-cask install virtualbox
-cask install vlc
-cask install xee
-cask install xquartz
+tap 'fnichol/dvm'
+brew 'dvm'
 
-tap fnichol/dvm
-install dvm
-
-tap caskroom/versions
-cask install google-chrome-beta
-cask install firefox-beta
-
-cask alfred link
-
-cleanup
+tap 'caskroom/versions'
+cask 'google-chrome-beta'
+cask 'firefox-beta'
