@@ -1,0 +1,5 @@
+type thefuck &>/dev/null
+
+if [ $? -eq 0 ]; then
+  eval $(thefuck --alias)
+fi
