@@ -30,7 +30,6 @@ brew 'wakeonlan'
 brew 'wget'
 brew 'youtube-dl'
 
-tap 'phinze/cask'
 brew 'brew-cask'
 cask 'adium'
 cask 'android-file-transfer'
