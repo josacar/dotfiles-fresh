@@ -270,3 +270,5 @@ let g:go_disable_autoinstall = 1
 " enable undo history
 set undofile
 set undodir=~/.vim-tmp/undodir
+
+nnoremap <Leader>p :!highlight -s solarized-light -O rtf % \| pbcopy<CR><CR>
