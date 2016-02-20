@@ -54,4 +54,5 @@ NeoBundle 'moll/vim-bbye' " Delete buffers and close files in Vim without closin
 NeoBundle 'AndrewRadev/splitjoin.vim' " simplifies the transition between multiline and single-line code
 " NeoBundle 'edkolev/tmuxline.vim' " Simple tmux statusline generator
 NeoBundle 'fatih/vim-go' " Go development
+NeoBundle 'scrooloose/syntastic' " Syntax checker
 
