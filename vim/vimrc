@@ -60,7 +60,7 @@ set listchars=tab:▸\ ,eol:¬
 "set list                             " Show invisible characters
 "set cursorline                       " Show cursor line.
 
-source ~/.vim/vimrc/neobundle.vim
+source ~/.vim/vimrc/plug-bundle.vim
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 

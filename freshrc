@@ -50,7 +50,7 @@ install_brew(){
 }
 
 install_vim_bundle(){
-  vim +NeoBundleInstall +qall
+  vim +PlugInstall +qall
 }
 
 install_chefdk_extra_gems(){
