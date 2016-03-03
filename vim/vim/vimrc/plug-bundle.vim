@@ -41,6 +41,7 @@ Plug 'AndrewRadev/splitjoin.vim' " simplifies the transition between multiline a
 " Plug 'edkolev/tmuxline.vim' " Simple tmux statusline generator
 Plug 'fatih/vim-go', { 'for': 'go' } " Go development
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' } " Terraform
+Plug 'scrooloose/syntastic' " Syntax checker
 
 " Add plugins to &runtimepath
 call plug#end()
