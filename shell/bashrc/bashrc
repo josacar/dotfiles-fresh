@@ -108,4 +108,4 @@ for dir in tmp _backup undodir; do
   [ ! -d $HOME/.vim-tmp/$dir ] && mkdir -p $HOME/.vim-tmp/$dir
 done
 
-export TERM='screen-256color'
+export TERM='xterm-256color'
