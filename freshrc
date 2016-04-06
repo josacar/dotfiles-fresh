@@ -64,8 +64,20 @@ install_chefdk_extra_gems(){
   fi
 }
 
+create_neovim_symlinks(){
+  [ ! -d $HOME/.config ] && \
+    mkdir -p $HOME/.config
+  [ ! -L "$HOME/.config/nvim" ] && \
+    rm -rf $HOME/.config/vim && \
+    ln -s $HOME/.vim $HOME/.config/nvim
+  [ ! -h $HOME/.config/nvim/init.vim ] && \
+    rm -rf $HOME/.config/nvim/init.vim && \
+    ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
+}
+
 # fresh hook
 fresh_after_build(){
+  create_neovim_symlinks
   install_brew
   install_vim_bundle
   install_chefdk_extra_gems
