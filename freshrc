@@ -41,6 +41,9 @@ fresh bundle/config --file=~/.bundle/config
 # Brewfile
 fresh Brewfile --file=~/Brewfile
 
+# plist files
+fresh plist/com.ugolandini.Pomodoro.plist --file=~/Library/Preferences/com.ugolandini.Pomodoro.plist
+
 install_brew(){
   if [ "$(uname)" == "Darwin" ] && ! which brew &> /dev/null; then
     echo 'Installing brew'
