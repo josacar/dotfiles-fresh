@@ -61,6 +61,7 @@ set listchars=tab:▸\ ,eol:¬
 "set cursorline                       " Show cursor line.
 
 source ~/.vim/vimrc/plug-bundle.vim
+source ~/.vim/vimrc/plug-bundle-versions.vim
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
