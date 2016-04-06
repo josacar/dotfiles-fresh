@@ -1,6 +1,8 @@
 # vim: set ft=sh:
 
+# Bin files
 fresh freshshell/fresh bin/fresh --bin
+fresh bin/\* --bin
 
 # Some shell aliases
 fresh shell/aliases/\*
