@@ -12,7 +12,7 @@ Plug 'godlygeek/tabular' " text filtering and alignment
 Plug 'bling/vim-airline' " lean & mean status/tabline for vim that's light as air
 " Plug 'bling/vim-bufferline' " show the list of buffers in the command bar
 " Plug 'tpope/vim-bundler' " Lightweight support for Ruby's Bundler
-Plug 'tpope/vim-commentary' " comment stuff out
+Plug 'tpope/vim-commentary', { 'tag': 'v1.3' } " comment stuff out
 Plug 'tpope/vim-endwise' " wisely add 'end' in ruby, endfunction/endif/more
 Plug 'tpope/vim-fugitive' " a Git wrapper
 Plug 'plasticboy/vim-markdown' " Markdown Vim Mode
