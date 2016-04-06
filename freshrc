@@ -59,7 +59,7 @@ install_vim_bundle(){
 }
 
 install_chefdk_extra_gems(){
-  if which chef &> /dev/null; then
+  if which chef &> /dev/null && chef gem list --no-installed knife-spec &> /dev/null; then
     chef gem install knife-spec
   fi
 }
