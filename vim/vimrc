@@ -285,4 +285,16 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 " neovim
-set mouse-=a
+set mouse=
+
+"Enable and disable mouse use
+noremap <Leader>m :call ToggleMouse()<CR>
+function! ToggleMouse()
+  if &mouse == 'a'
+    set mouse=
+    echo "Mouse usage disabled"
+  else
+    set mouse=a
+    echo "Mouse usage enabled"
+  endif
+endfunction
