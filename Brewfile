@@ -80,3 +80,6 @@ brew 'dvm'
 tap 'caskroom/versions'
 cask 'google-chrome-beta'
 cask 'firefox-beta'
+
+brew tap 'neovim/homebrew-neovim'
+brew install 'neovim'
