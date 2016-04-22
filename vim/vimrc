@@ -298,3 +298,5 @@ function! ToggleMouse()
     echo "Mouse usage enabled"
   endif
 endfunction
+
+cmap w!! w !sudo tee % >/dev/null
