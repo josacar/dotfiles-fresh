@@ -1,6 +1,7 @@
 [user]
   email = josacar@users.noreply.github.com
   name = Jose Luis Salas
+  signingkey = 926C5673
 [github]
   user = josacar
 [core]

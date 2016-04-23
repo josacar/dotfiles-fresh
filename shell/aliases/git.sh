@@ -22,7 +22,7 @@ alias ga='git add'
 alias gau='git add -u'
 alias gap='git add -p'
 alias gld="git fsck --lost-found | grep '^dangling commit' | cut -d ' ' -f 3- | xargs git show -s --format='%ct %H' | sort -nr | cut -d ' ' -f 2 | xargs git show --stat"
-alias gc='git commit -v'
+alias gc='git commit -v -S'
 alias gca='gc --amend'
 alias grt='git_current_tracking > /dev/null && git rebase -i @{upstream}'
 alias grc='git rebase --continue'
@@ -40,16 +40,14 @@ alias ghpull='git pull --rebase heroku $(git_current_branch)'
 alias ghpush='git push heroku $(git_current_branch)'
 
 # helper for git aliases
-function git_current_branch()
-{
+function git_current_branch() {
   local BRANCH="$(git symbolic-ref -q HEAD)"
   local BRANCH="${BRANCH##refs/heads/}"
   local BRANCH="${BRANCH:-HEAD}"
   echo "$BRANCH"
 }
 
-function git_current_tracking()
-{
+function git_current_tracking() {
   local BRANCH="$(git_current_branch)"
   local REMOTE="$(git config branch.$BRANCH.remote)"
   local MERGE="$(git config branch.$BRANCH.merge)"
@@ -63,8 +61,7 @@ function git_current_tracking()
 }
 
 # git log patch
-function glp()
-{
+function glp() {
   # don't use the pager if in word-diff mode
   local pager="$(echo "$*" | grep -q -- '--word-diff' && echo --no-pager)"
 
@@ -84,14 +81,12 @@ function glp()
 }
 
 # git log file
-function glf()
-{
+function glf() {
   git log --format=%H --follow -- "$@" | xargs --no-run-if-empty git show --stat
 }
 
 # git log search
-function gls()
-{
+function gls() {
   local phrase="$1"
   shift
   if [[ $# == 0 ]]
@@ -102,93 +97,91 @@ function gls()
 }
 
 # checkout a GitHub pull request as a local branch
-function gpr()
-{
+function gpr() {
   local TEMP_FILE="$(mktemp "${TMPDIR:-/tmp}/gpr.XXXXXX")"
   echo '+refs/pull/*/head:refs/remotes/origin/pr/*' > "$TEMP_FILE"
   git config --get-all remote.origin.fetch | grep -v 'refs/remotes/origin/pr/\*$' >> "$TEMP_FILE"
   git config --unset-all remote.origin.fetch
   cat "$TEMP_FILE" | while read LINE
-  do
-    git config --add remote.origin.fetch "$LINE"
-  done
-  rm "$TEMP_FILE"
+do
+  git config --add remote.origin.fetch "$LINE"
+done
+rm "$TEMP_FILE"
 
-  git fetch
-  if [[ -n "$1" ]]; then
-    git checkout "pr/$1"
-  fi
+git fetch
+if [[ -n "$1" ]]; then
+  git checkout "pr/$1"
+fi
 }
 
-function gup
-{
+function gup {
   # subshell for `set -e` and `trap`
   (
-    set -e # fail immediately if there's a problem
+  set -e # fail immediately if there's a problem
 
-    # use `git-up` if installed
-    if type git-up > /dev/null 2>&1
+  # use `git-up` if installed
+  if type git-up > /dev/null 2>&1
+  then
+    exec git-up
+  fi
+
+  # fetch upstream changes
+  git fetch
+
+  BRANCH=$(git symbolic-ref -q HEAD)
+  BRANCH=${BRANCH##refs/heads/}
+  BRANCH=${BRANCH:-HEAD}
+
+  if [ -z "$(git config branch.$BRANCH.remote)" -o -z "$(git config branch.$BRANCH.merge)" ]
+  then
+    echo "\"$BRANCH\" is not a tracking branch." >&2
+    exit 1
+  fi
+
+  # create a temp file for capturing command output
+  TEMPFILE="`mktemp -t gup.XXXXXX`"
+  trap '{ rm -f "$TEMPFILE"; }' EXIT
+
+  # if we're behind upstream, we need to update
+  if git status | grep "# Your branch" > "$TEMPFILE"
+  then
+
+    # extract tracking branch from message
+    UPSTREAM=$(cat "$TEMPFILE" | cut -d "'" -f 2)
+    if [ -z "$UPSTREAM" ]
     then
-      exec git-up
-    fi
-
-    # fetch upstream changes
-    git fetch
-
-    BRANCH=$(git symbolic-ref -q HEAD)
-    BRANCH=${BRANCH##refs/heads/}
-    BRANCH=${BRANCH:-HEAD}
-
-    if [ -z "$(git config branch.$BRANCH.remote)" -o -z "$(git config branch.$BRANCH.merge)" ]
-    then
-      echo "\"$BRANCH\" is not a tracking branch." >&2
+      echo Could not detect upstream branch >&2
       exit 1
     fi
 
-    # create a temp file for capturing command output
-    TEMPFILE="`mktemp -t gup.XXXXXX`"
-    trap '{ rm -f "$TEMPFILE"; }' EXIT
+    # can we fast-forward?
+    CAN_FF=1
+    grep -q "can be fast-forwarded" "$TEMPFILE" || CAN_FF=0
 
-    # if we're behind upstream, we need to update
-    if git status | grep "# Your branch" > "$TEMPFILE"
+    # stash any uncommitted changes
+    git stash | tee "$TEMPFILE"
+    [ "${PIPESTATUS[0]}" -eq 0 ] || exit 1
+
+    # take note if anything was stashed
+    HAVE_STASH=0
+    grep -q "No local changes" "$TEMPFILE" || HAVE_STASH=1
+
+    if [ "$CAN_FF" -ne 0 ]
     then
-
-      # extract tracking branch from message
-      UPSTREAM=$(cat "$TEMPFILE" | cut -d "'" -f 2)
-      if [ -z "$UPSTREAM" ]
-      then
-        echo Could not detect upstream branch >&2
-        exit 1
-      fi
-
-      # can we fast-forward?
-      CAN_FF=1
-      grep -q "can be fast-forwarded" "$TEMPFILE" || CAN_FF=0
-
-      # stash any uncommitted changes
-      git stash | tee "$TEMPFILE"
-      [ "${PIPESTATUS[0]}" -eq 0 ] || exit 1
-
-      # take note if anything was stashed
-      HAVE_STASH=0
-      grep -q "No local changes" "$TEMPFILE" || HAVE_STASH=1
-
-      if [ "$CAN_FF" -ne 0 ]
-      then
-        # if nothing has changed locally, just fast foward.
-        git merge --ff "$UPSTREAM"
-      else
-        # rebase our changes on top of upstream, but keep any merges
-        git rebase -p "$UPSTREAM"
-      fi
-
-      # restore any stashed changes
-      if [ "$HAVE_STASH" -ne 0 ]
-      then
-        git stash pop
-      fi
-
+      # if nothing has changed locally, just fast foward.
+      git merge --ff "$UPSTREAM"
+    else
+      # rebase our changes on top of upstream, but keep any merges
+      git rebase -p "$UPSTREAM"
     fi
+
+    # restore any stashed changes
+    if [ "$HAVE_STASH" -ne 0 ]
+    then
+      git stash pop
+    fi
+
+  fi
 
   )
 }
@@ -199,15 +192,15 @@ gauv() {
 
 gaur() {
   git ls-files --exclude-standard --modified -z | xargs -0 git ls-files --stage | while read MODE OBJECT STAGE NAME; do
-    if [[ "$OBJECT" == e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 ]]; then
-      echo "reset '$NAME'"
-      if git rev-parse --quiet --verify HEAD > /dev/null; then
-        git reset -q -- "$NAME" 2>&1
-      else
-        git rm --cached --quiet -- "$NAME"
-      fi
+  if [[ "$OBJECT" == e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 ]]; then
+    echo "reset '$NAME'"
+    if git rev-parse --quiet --verify HEAD > /dev/null; then
+      git reset -q -- "$NAME" 2>&1
+    else
+      git rm --cached --quiet -- "$NAME"
     fi
-  done
+  fi
+done
 }
 
 gcf() {
@@ -217,9 +210,9 @@ gcf() {
   fi
 
   COMMITS="$(
-    git diff --staged --name-only -z |
-      xargs -0 git log --pretty=format:'%H %s' @{u}.. |
-      awk '{ if ($2 != "fixup!") { print $1} }'
+  git diff --staged --name-only -z |
+  xargs -0 git log --pretty=format:'%H %s' @{u}.. |
+  awk '{ if ($2 != "fixup!") { print $1} }'
   )"
 
   case $(echo "$COMMITS" | grep . | wc -l) in
