@@ -22,7 +22,7 @@ alias ga='git add'
 alias gau='git add -u'
 alias gap='git add -p'
 alias gld="git fsck --lost-found | grep '^dangling commit' | cut -d ' ' -f 3- | xargs git show -s --format='%ct %H' | sort -nr | cut -d ' ' -f 2 | xargs git show --stat"
-alias gc='git commit -v -S'
+alias gc='git commit -v'
 alias gca='gc --amend'
 alias grt='git_current_tracking > /dev/null && git rebase -i @{upstream}'
 alias grc='git rebase --continue'
