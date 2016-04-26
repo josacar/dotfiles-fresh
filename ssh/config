@@ -4,3 +4,6 @@ Host *
     HashKnownHosts yes
     GSSAPIAuthentication yes
     GSSAPIDelegateCredentials no
+
+Host *.tmate.io
+    ForwardAgent no
