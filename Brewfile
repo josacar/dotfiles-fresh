@@ -74,9 +74,6 @@ cask 'vlc'
 cask 'xee'
 cask 'xquartz'
 
-tap 'fnichol/dvm'
-brew 'dvm'
-
 tap 'caskroom/versions'
 cask 'google-chrome-beta'
 cask 'firefox-beta'
