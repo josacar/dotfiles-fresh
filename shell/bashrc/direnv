@@ -1,0 +1,5 @@
+type direnv &>/dev/null
+
+if [ $? -eq 0 ]; then
+  eval "$(direnv hook bash)"
+fi
