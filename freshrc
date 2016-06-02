@@ -12,6 +12,8 @@ fresh-options --file=~/.bashrc --marker=#
   fresh shell/completions/\*
   fresh shell/bashrc/\*
   fresh freshshell/fresh contrib/source-build.sh
+  fresh rupa/z z.sh
+
 fresh-options
 
 fresh freshshell/fresh contrib/completion/fresh-completion.bash
