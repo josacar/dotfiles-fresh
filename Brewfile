@@ -73,6 +73,7 @@ cask 'virtualbox-extension-pack'
 cask 'vlc'
 cask 'xee'
 cask 'xquartz'
+cask 'quitter'
 
 tap 'caskroom/versions'
 cask 'google-chrome-beta'
