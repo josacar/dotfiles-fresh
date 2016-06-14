@@ -3,7 +3,7 @@ call plug#begin('~/.vim-bundle')
 Plug 'Shougo/vimproc', { 'do': 'make' }
 " Interactive command execution in Vim
 Plug 'wincent/ferret', { 'on': ['Ack', 'Acks'] }
-Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' } " Full path fuzzy file, buffer, mru, tag, finder for Vim
+Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Full path fuzzy file, buffer, mru, tag, finder for Vim
 " Plug 'Raimondi/delimitMate' " insert mode auto-completion for quotes, parens, brackets
 Plug 'mattn/gist-vim' " creating gists
 Plug 'scrooloose/nerdtree' " A tree explorer
@@ -42,6 +42,7 @@ Plug 'AndrewRadev/splitjoin.vim' " simplifies the transition between multiline a
 Plug 'fatih/vim-go', { 'for': 'go' } " Go development
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' } " Terraform
 Plug 'scrooloose/syntastic' " Syntax checker
+Plug 'rhysd/vim-crystal'
 
 " Add plugins to &runtimepath
 call plug#end()
