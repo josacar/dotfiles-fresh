@@ -64,6 +64,8 @@ install_chefdk_extra_gems(){
   install_chefdk_gem knife-spec
   install_chefdk_gem kitchen-docker
   install_chefdk_gem kitchen-dokken
+  install_chefdk_gem kitchen-inspec
+  install_chefdk_gem inspec
 }
 
 install_chefdk_gem(){
