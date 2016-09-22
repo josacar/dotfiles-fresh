@@ -30,7 +30,6 @@ brew 'wakeonlan'
 brew 'wget'
 brew 'youtube-dl'
 
-brew 'brew-cask'
 cask 'android-file-transfer'
 cask 'bittorrent-sync'
 cask 'clementine'
