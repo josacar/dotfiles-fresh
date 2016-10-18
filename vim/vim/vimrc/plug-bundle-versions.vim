@@ -1,6 +1,6 @@
 " Plug versions
 silent! let g:plugs['argtextobj.vim'].commit = 'f3fbe42'
-silent! let g:plugs['ctrlp.vim'].commit = '564176f'
+silent! let g:plugs['ctrlp.vim'].commit = 'c6d1fc5'
 silent! let g:plugs['ferret'].commit = 'a95f837'
 silent! let g:plugs['gist-vim'].commit = '88c331e'
 silent! let g:plugs['nerdtree'].commit = '4ebbb53'
