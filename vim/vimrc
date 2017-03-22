@@ -299,4 +299,8 @@ function! ToggleMouse()
   endif
 endfunction
 
+" Allow saving buffer as root
 cmap w!! w !sudo tee % >/dev/null
+
+" Show tabs as characters
+:set listchars=tab:>-,trail:~,extends:>,precedes:<
