@@ -86,10 +86,18 @@ create_neovim_symlinks(){
     ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 }
 
+install_asdf(){
+  [ ! -d $HOME/.asdf ] && \
+    git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.3.0
+  asdf plugin-add terraform https://github.com/neerfri/asdf-terraform
+  asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby
+}
+
 # fresh hook
 fresh_after_build(){
   create_neovim_symlinks
   install_brew
   install_vim_bundle
   install_chefdk_extra_gems
+  install_asdf
 }
