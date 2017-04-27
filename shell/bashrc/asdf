@@ -1,0 +1,10 @@
+test -f $HOME/.asdf/asdf.sh && source $HOME/.asdf/asdf.sh
+test -f $HOME/.asdf/completions/asdf.bash && source $HOME/.asdf/completions/asdf.bash
+
+type asdf &>/dev/null
+
+if [ $? -eq 0 ]; then
+  install_ruby_version(){
+    asdf install ruby $1
+  }
+fi
