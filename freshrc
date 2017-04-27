@@ -89,8 +89,8 @@ create_neovim_symlinks(){
 install_asdf(){
   [ ! -d $HOME/.asdf ] && \
     git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.3.0
-  asdf plugin-add terraform https://github.com/neerfri/asdf-terraform
-  asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby
+  asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby || true
+  asdf plugin-add terraform https://github.com/neerfri/asdf-terraform || true
 }
 
 # fresh hook
