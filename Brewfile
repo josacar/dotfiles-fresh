@@ -4,8 +4,8 @@ brew 'findutils'
 brew 'gnu-sed', args: ['--with-default-names']
 
 brew 'ack'
+brew 'asdf'
 brew 'axel'
-brew 'chruby'
 brew 'git'
 brew 'gpg'
 brew 'go'
