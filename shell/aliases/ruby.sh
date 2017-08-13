@@ -4,13 +4,9 @@ alias be='bundle exec'
 alias ber='bundle exec rspec'
 alias beh='BUNDLE_GEMFILE=$HOME/Gemfile bundle exec'
 
-alias cap='bundle exec cap'
-
 function rake
 {
-  if [ -S .zeus.sock ]; then
-    zeus rake "$@"
-  elif [ -f Gemfile ]; then
+  if [ -f Gemfile ]; then
     bundle exec rake "$@"
   else
     command rake "$@"

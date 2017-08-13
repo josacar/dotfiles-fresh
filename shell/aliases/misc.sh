@@ -6,7 +6,10 @@ which ack-grep > /dev/null
 which nvim > /dev/null
 [ $? -eq 0 ] && alias vim='nvim'
 
-alias vless='/usr/share/vim/vim73/macros/less.sh'
+which exa > /dev/null
+[ $? -eq 0 ] && alias ls='exa'
+
+alias vless='/usr/share/vim/vim80/macros/less.sh'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
