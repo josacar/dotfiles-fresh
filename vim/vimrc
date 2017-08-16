@@ -45,7 +45,8 @@ if &t_ts != ""
 endif
 endif
 
-set visualbell                        " No beeping.
+set noerrorbells                      " No beeping.
+set novisualbell                      " No flashing
 
 set nobackup                          " Don't make a backup before overwriting a file.
 set nowritebackup                     " And again.
