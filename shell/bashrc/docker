@@ -1,5 +1,5 @@
 __docker_prompt() {
   if [ -n "$DOCKER_HOST" ]; then
-    echo "🐳 "
+    echo " 🐳 "
   fi
 }
