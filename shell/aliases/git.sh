@@ -1,36 +1,37 @@
-alias glg='git log --graph --pretty=format:"%Cred%h%Creset%C(yellow)%d%Creset %s %C(green bold)- %an %C(black bold)%cd (%cr)%Creset" --abbrev-commit --date=short'
-alias gl='glg $(git show-ref | cut -d " " -f 2 | grep -v stash$)'
-alias glw='glp --word-diff'
-alias gsh='git show'
-alias gco='git checkout'
-alias gcp='git checkout -p'
-alias gs='git status'
-alias gsu='git status -uno'
-alias gss='git status -sb'
-alias gst='git stash --include-untracked --keep-index'
-alias gstp='git stash pop'
-alias gd='git diff'
-alias gdw='gd --word-diff=color --word-diff-regex="[A-z0-9_-]+"'
-alias gdc='gd --cached'
-alias gdcw='gdw --cached'
+alias ga='git add'
+alias gap='git add -p'
+alias gar='git reset HEAD'
+alias garp='git reset -p HEAD'
+alias gau='git add -u'
 alias gbd='gd $(git merge-base origin/HEAD HEAD)..'
 alias gbl='glg $(git merge-base origin/HEAD HEAD)..'
 alias gblp='glp $(git merge-base origin/HEAD HEAD)..'
-alias gar='git reset HEAD'
-alias garp='git reset -p HEAD'
-alias ga='git add'
-alias gau='git add -u'
-alias gap='git add -p'
-alias gld="git fsck --lost-found | grep '^dangling commit' | cut -d ' ' -f 3- | xargs git show -s --format='%ct %H' | sort -nr | cut -d ' ' -f 2 | xargs git show --stat"
 alias gc='git commit -v'
 alias gca='gc --amend'
-alias grt='git_current_tracking > /dev/null && git rebase -i @{upstream}'
-alias grc='git rebase --continue'
+alias gco='git checkout'
+alias gcp='git checkout -p'
+alias gd='git diff'
+alias gdc='gd --cached'
+alias gdcw='gdw --cached'
+alias gdw='gd --word-diff=color --word-diff-regex="[A-z0-9_-]+"'
+alias gfa='git fa'
+alias gl='glg $(git show-ref | cut -d " " -f 2 | grep -v stash$)'
+alias gld="git fsck --lost-found | grep '^dangling commit' | cut -d ' ' -f 3- | xargs git show -s --format='%ct %H' | sort -nr | cut -d ' ' -f 2 | xargs git show --stat"
+alias glg='git log --graph --pretty=format:"%Cred%h%Creset%C(yellow)%d%Creset %s %C(green bold)- %an %C(black bold)%cd (%cr)%Creset" --abbrev-commit --date=short'
+alias glw='glp --word-diff'
 alias gp='git push'
 alias gpt='git push -u origin $(git_current_branch)'
-alias gws='git wip save WIP --untracked'
+alias grc='git rebase --continue'
+alias grt='git_current_tracking > /dev/null && git rebase -i @{upstream}'
+alias grv='git remote -v'
+alias gs='git status'
+alias gsh='git show'
+alias gss='git status -sb'
+alias gst='git stash --include-untracked --keep-index'
+alias gstp='git stash pop'
+alias gsu='git status -uno'
 alias gwd='git update-ref -d refs/wip/$(git_current_branch)'
-alias gfa='git fa'
+alias gws='git wip save WIP --untracked'
 
 alias ggpull='git pull --rebase origin $(git_current_branch)'
 alias ggpush='git push origin $(git_current_branch)'
@@ -40,19 +41,18 @@ alias ghpull='git pull --rebase heroku $(git_current_branch)'
 alias ghpush='git push heroku $(git_current_branch)'
 
 # helper for git aliases
-function git_current_branch() {
-  local BRANCH="$(git symbolic-ref -q HEAD)"
-  local BRANCH="${BRANCH##refs/heads/}"
-  local BRANCH="${BRANCH:-HEAD}"
+git_current_branch() {
+  BRANCH="$(git symbolic-ref -q HEAD)"
+  BRANCH="${BRANCH##refs/heads/}"
+  BRANCH="${BRANCH:-HEAD}"
   echo "$BRANCH"
 }
 
-function git_current_tracking() {
-  local BRANCH="$(git_current_branch)"
-  local REMOTE="$(git config branch.$BRANCH.remote)"
-  local MERGE="$(git config branch.$BRANCH.merge)"
-  if [ -n "$REMOTE" -a -n "$MERGE" ]
-  then
+git_current_tracking() {
+  BRANCH="$(git_current_branch)"
+  REMOTE="$(git config branch.$BRANCH.remote)"
+  MERGE="$(git config branch.$BRANCH.merge)"
+  if [ -n "$REMOTE" ] && [ -n "$MERGE" ]; then
     echo "$REMOTE/$(echo "$MERGE" | sed 's#^refs/heads/##')"
   else
     echo "\"$BRANCH\" is not a tracking branch." >&2
@@ -61,60 +61,59 @@ function git_current_tracking() {
 }
 
 # git log patch
-function glp() {
+glp() {
   # don't use the pager if in word-diff mode
-  local pager="$(echo "$*" | grep -q -- '--word-diff' && echo --no-pager)"
+  pager="$(echo "$*" | grep -q -- '--word-diff' && echo --no-pager)"
 
   # use reverse mode if we have a range
-  local reverse="$(echo "$*" | grep -q '\.\.' && echo --reverse)"
+  reverse="$(echo "$*" | grep -q '\.\.' && echo --reverse)"
 
   # if we have no non-option args then default to listing unpushed commits in reverse moode
   if ! (for ARG in "$@"; do echo "$ARG" | grep -v '^-'; done) | grep -q . && git_current_tracking > /dev/null 2>&1
   then
-    local default_range="@{upstream}..HEAD"
-    local reverse='--reverse'
+    default_range="@{upstream}..HEAD"
+    reverse='--reverse'
   else
-    local default_range=''
+    default_range=''
   fi
 
   git $pager log --patch $reverse "$@" $default_range
 }
 
 # git log file
-function glf() {
+glf() {
   git log --format=%H --follow -- "$@" | xargs --no-run-if-empty git show --stat
 }
 
 # git log search
-function gls() {
-  local phrase="$1"
+gls() {
+  phrase="$1"
   shift
-  if [[ $# == 0 ]]
-  then
-    local default_range=HEAD
+  if [ $# -eq 0 ]; then
+    default_range=HEAD
   fi
   glp --pickaxe-all -S"$phrase" "$@" $default_range
 }
 
 # checkout a GitHub pull request as a local branch
-function gpr() {
-  local TEMP_FILE="$(mktemp "${TMPDIR:-/tmp}/gpr.XXXXXX")"
+gpr() {
+  TEMP_FILE="$(mktemp "${TMPDIR:-/tmp}/gpr.XXXXXX")"
   echo '+refs/pull/*/head:refs/remotes/origin/pr/*' > "$TEMP_FILE"
   git config --get-all remote.origin.fetch | grep -v 'refs/remotes/origin/pr/\*$' >> "$TEMP_FILE"
   git config --unset-all remote.origin.fetch
-  cat "$TEMP_FILE" | while read LINE
-do
-  git config --add remote.origin.fetch "$LINE"
-done
-rm "$TEMP_FILE"
+  while read -r LINE < "$TEMP_FILE"
+  do
+    git config --add remote.origin.fetch "$LINE"
+  done
+  rm "$TEMP_FILE"
 
-git fetch
-if [[ -n "$1" ]]; then
-  git checkout "pr/$1"
-fi
+  git fetch
+  if [ -n "$1" ]; then
+    git checkout "pr/$1"
+  fi
 }
 
-function gup {
+gup() {
   # subshell for `set -e` and `trap`
   (
   set -e # fail immediately if there's a problem
@@ -132,14 +131,13 @@ function gup {
   BRANCH=${BRANCH##refs/heads/}
   BRANCH=${BRANCH:-HEAD}
 
-  if [ -z "$(git config branch.$BRANCH.remote)" -o -z "$(git config branch.$BRANCH.merge)" ]
-  then
+  if [ -z "$(git config branch.$BRANCH.remote)" ] || [ -z "$(git config branch.$BRANCH.merge)" ]; then
     echo "\"$BRANCH\" is not a tracking branch." >&2
     exit 1
   fi
 
   # create a temp file for capturing command output
-  TEMPFILE="`mktemp -t gup.XXXXXX`"
+  TEMPFILE="$(mktemp -t gup.XXXXXX)"
   trap '{ rm -f "$TEMPFILE"; }' EXIT
 
   # if we're behind upstream, we need to update
@@ -147,7 +145,7 @@ function gup {
   then
 
     # extract tracking branch from message
-    UPSTREAM=$(cat "$TEMPFILE" | cut -d "'" -f 2)
+    UPSTREAM=$(cut -d "'" -f 2 < "$TEMPFILE")
     if [ -z "$UPSTREAM" ]
     then
       echo Could not detect upstream branch >&2
@@ -192,7 +190,7 @@ gauv() {
 
 gaur() {
   git ls-files --exclude-standard --modified -z | xargs -0 git ls-files --stage | while read MODE OBJECT STAGE NAME; do
-  if [[ "$OBJECT" == e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 ]]; then
+  if [ "$OBJECT" == e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 ]; then
     echo "reset '$NAME'"
     if git rev-parse --quiet --verify HEAD > /dev/null; then
       git reset -q -- "$NAME" 2>&1
@@ -204,7 +202,7 @@ done
 }
 
 gcf() {
-  if [[ $(git diff --staged --name-only | wc -l) -lt 1 ]]; then
+  if [ $(git diff --staged --name-only | wc -l) -lt 1 ]; then
     echo Nothing staged to commit. >&2
     return 1
   fi
@@ -215,7 +213,7 @@ gcf() {
   awk '{ if ($2 != "fixup!") { print $1} }'
   )"
 
-  case $(echo "$COMMITS" | grep . | wc -l) in
+  case $(echo "$COMMITS" | grep -c .) in
     0)
       echo No fixup candidates found. >&2
       return 1
