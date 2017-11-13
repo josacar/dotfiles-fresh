@@ -6,6 +6,7 @@ brew 'gnu-sed', args: ['--with-default-names']
 brew 'ack'
 brew 'asdf'
 brew 'axel'
+brew 'bash-completion'
 brew 'exa'
 brew 'git'
 brew 'gpg'
@@ -46,7 +47,6 @@ cask 'google-drive'
 cask 'google-hangouts'
 cask 'gpgtools'
 cask 'iterm2'
-cask 'libreoffice'
 cask 'licecap'
 cask 'macdown'
 cask 'osxfuse'
@@ -73,6 +73,8 @@ cask 'firefox-beta'
 
 tap 'neovim/homebrew-neovim'
 brew 'neovim'
+
+tap 'buo/cask-upgrade'
 
 brew 'mas'
 mas 'Twitter', id: 409789998
