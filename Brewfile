@@ -34,7 +34,6 @@ brew 'wget'
 brew 'youtube-dl'
 
 cask 'android-file-transfer'
-cask 'bittorrent-sync'
 cask 'clementine'
 cask 'chefdk'
 cask 'chicken'
@@ -43,9 +42,7 @@ cask 'cyberduck'
 cask 'dropbox'
 cask 'jitsi'
 cask 'karabiner'
-cask 'google-drive'
 cask 'google-hangouts'
-cask 'gpgtools'
 cask 'iterm2'
 cask 'licecap'
 cask 'macdown'
@@ -57,7 +54,6 @@ cask 'spotify'
 cask 'spectacle'
 cask 'textmate'
 cask 'the-unarchiver'
-cask 'tomahawk'
 cask 'trim-enabler'
 cask 'tunnelblick'
 cask 'vagrant'
@@ -88,3 +84,5 @@ mas 'Keynote', id: 409183694
 mas 'Todoist', id: 585829637
 mas 'StreamCloud', id: 894578573
 mas 'Numbers', id: 409203825
+mas 'Slack', id: 803453959
+mas 'Whatsapp', id: 1147396723
