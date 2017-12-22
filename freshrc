@@ -19,7 +19,7 @@ fresh-options
 fresh freshshell/fresh contrib/completion/fresh-completion.bash
 
 # Config files
-fresh config/\* --file
+fresh config/\* --file --filter=erb
 
 # Tmux
 fresh-options --file=~/.tmux.conf --marker=#
