@@ -6,6 +6,7 @@ brew 'gnu-sed', args: ['--with-default-names']
 brew 'ack'
 brew 'asdf'
 brew 'axel'
+brew 'crystal-lang'
 brew 'bash-completion'
 brew 'direnv'
 brew 'exa'
