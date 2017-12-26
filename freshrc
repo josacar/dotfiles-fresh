@@ -45,6 +45,9 @@ fresh Brewfile --file=~/Brewfile
 
 # plist files
 fresh plist/com.ugolandini.Pomodoro.plist --file=~/Library/Preferences/com.ugolandini.Pomodoro.plist
+fresh plist/com.googlecode.iterm2.plist --file=~/Library/Preferences/com.googlecode.iterm2.plist
+fresh plist/com.ragingmenace.MenuMeters.plist --file=~/Library/Preferences/com.ragingmenace.MenuMeters.plist
+fresh plist/com.divisiblebyzero.Spectacle.plist --file=~/Library/Preferences/com.divisiblebyzero.Spectacle.plist
 
 install_brew(){
   if [ "$(uname)" == "Darwin" ] && ! which brew &> /dev/null; then
