@@ -64,6 +64,7 @@ cask 'virtualbox'
 cask 'virtualbox-extension-pack'
 cask 'vlc'
 cask 'xquartz'
+cask 'yujitach-menumeters'
 cask 'quitter'
 
 tap 'caskroom/versions'
