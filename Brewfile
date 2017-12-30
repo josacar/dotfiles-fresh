@@ -37,6 +37,7 @@ brew 'wget'
 brew 'youtube-dl'
 
 cask 'android-file-transfer'
+cask 'caption'
 cask 'clementine'
 cask 'chefdk'
 cask 'chicken'
