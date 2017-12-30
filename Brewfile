@@ -31,7 +31,7 @@ brew 'ssh-copy-id'
 brew 'the_silver_searcher'
 brew 'tmux'
 brew 'tree'
-brew 'vim'
+brew 'vim', args: ['--without-ruby']
 brew 'wakeonlan'
 brew 'wget'
 brew 'youtube-dl'
