@@ -50,11 +50,10 @@ fresh plist/com.ragingmenace.MenuMeters.plist --file=~/Library/Preferences/com.r
 fresh plist/com.divisiblebyzero.Spectacle.plist --file=~/Library/Preferences/com.divisiblebyzero.Spectacle.plist
 
 install_brew(){
-  if [ "$(uname)" == "Darwin" ] && ! which brew &> /dev/null; then
+  if [ "$(uname)" = "Darwin" ] && ! which brew > /dev/null 2>&1; then
     echo 'Installing brew'
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    cd $HOME
-    brew bundle
+    cd "$HOME" && brew bundle
   fi
 }
 
@@ -71,21 +70,21 @@ install_chefdk_extra_gems(){
 }
 
 install_chefdk_gem(){
-  local gem=$1
-  if which chef &> /dev/null && chef gem list --no-installed $gem &> /dev/null; then
-    chef gem install $gem
+  gem=$1
+  if which chef > /dev/null 2>&1 && chef gem list --no-installed "$gem" > /dev/null 2>&1; then
+    chef gem install "$gem"
   fi
 }
 
 create_neovim_symlinks(){
-  [ ! -d $HOME/.config ] && \
-    mkdir -p $HOME/.config
+  [ ! -d "$HOME/.config" ] && \
+    mkdir -p "$HOME/.config"
   [ ! -L "$HOME/.config/nvim" ] && \
-    rm -rf $HOME/.config/vim && \
-    ln -s $HOME/.vim $HOME/.config/nvim
-  [ ! -h $HOME/.config/nvim/init.vim ] && \
-    rm -rf $HOME/.config/nvim/init.vim && \
-    ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
+    rm -rf "$HOME/.config/vim" && \
+    ln -s "$HOME/.vim" "$HOME/.config/nvim"
+  [ ! -h "$HOME/.config/nvim/init.vim" ] && \
+    rm -rf "$HOME/.config/nvim/init.vim" && \
+    ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 }
 
 install_asdf(){
