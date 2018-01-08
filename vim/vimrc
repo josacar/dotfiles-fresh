@@ -303,3 +303,5 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Show tabs as characters
 :set listchars=tab:>-,trail:~,extends:>,precedes:<
+
+nnoremap <silent> <C-P> :CtrlP<CR>
