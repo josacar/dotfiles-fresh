@@ -23,7 +23,7 @@ Plug 'mattn/webapi-vim' " vim interface to Web API
 Plug 'vim-scripts/argtextobj.vim' " Text-object like motion for arguments
 Plug 'kana/vim-textobj-user' " Create your own text objects
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }  " A custom text object for selecting ruby blocks.
-Plug 'plugin/vim-polyglot' " A collection of language packs for Vim.
+Plug 'sheerun/vim-polyglot' " A collection of language packs for Vim.
 Plug 'junkblocker/patchreview-vim' " doing single, multi-patch or diff code reviews
 Plug 'codegram/vim-codereview' " GitHub Pull Request-based Code Reviews
 Plug 'moll/vim-bbye' " Delete buffers and close files in Vim without closing your windows
