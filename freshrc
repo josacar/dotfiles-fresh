@@ -50,8 +50,8 @@ fresh plist/com.ragingmenace.MenuMeters.plist --file=~/Library/Preferences/com.r
 fresh plist/com.divisiblebyzero.Spectacle.plist --file=~/Library/Preferences/com.divisiblebyzero.Spectacle.plist
 
 # Work
-if [ "x$WORK" == "true" ]; then
-  fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra
+if ! [ -z ${WORK+x} ]; then
+  fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra --file
 fi
 
 install_brew(){
