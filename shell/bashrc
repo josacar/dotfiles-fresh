@@ -91,7 +91,7 @@ if declare -F __git_ps1 > /dev/null ;then
 fi
 
 if declare -F kube_ps1 > /dev/null ;then
-  PS1="${PS1}[\$(kube_ps1)]"
+  PS1="${PS1}\$(kube_ps1)"
 fi
 
 PS1="${PS1}\[\033[00m\]\$ "
