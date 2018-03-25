@@ -84,7 +84,6 @@ brew 'neovim'
 tap 'buo/cask-upgrade'
 
 brew 'mas'
-mas 'Twitter', id: 409789998
 mas 'iPhoto', id: 408981381
 mas 'Telegram', id: 747648890
 mas 'GarageBand', id: 682658836
