@@ -1,0 +1,1 @@
+Pry.config.print = Proc.new { |output, value| }
