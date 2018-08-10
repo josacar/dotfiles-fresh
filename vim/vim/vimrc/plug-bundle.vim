@@ -28,7 +28,7 @@ Plug 'junkblocker/patchreview-vim' " doing single, multi-patch or diff code revi
 Plug 'codegram/vim-codereview' " GitHub Pull Request-based Code Reviews
 Plug 'moll/vim-bbye' " Delete buffers and close files in Vim without closing your windows
 Plug 'AndrewRadev/splitjoin.vim' " simplifies the transition between multiline and single-line code
-Plug 'scrooloose/syntastic' " Syntax checker
+Plug 'w0rp/ale' " Syntax checker
 
 " Add plugins to &runtimepath
 call plug#end()

@@ -186,7 +186,7 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#ale = 1
 
 " Override some sections
 " let spc = ' '
@@ -272,16 +272,6 @@ set undofile
 set undodir=~/.vim-tmp/undodir
 
 nnoremap <Leader>p :!highlight -s solarized-light -O rtf % \| pbcopy<CR><CR>
-
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 " neovim
 set mouse=
