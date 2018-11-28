@@ -41,6 +41,7 @@
   br = branch
   ci = commit
   co = checkout
+  com = checkout master
   cp = cherry-pick
   dc = diff --cached
   di = diff
@@ -48,7 +49,8 @@
   dw  = diff --color-words
   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; $EDITOR `f`"
   fa = fetch --all
-  fapu = "!git fa && git pull"
+  fap = fetch --all --prune
+  fapu = "!git fap && git pull"
   fp = format-patch
   l = "!source ~/.githelpers && pretty_git_log"
   la = !git l --all
