@@ -296,3 +296,6 @@ set listchars=tab:▶\ ,trail:~,extends:>,precedes:<,nbsp:.,eol:¬
 set list
 
 nnoremap <silent> <C-P> :CtrlP<CR>
+
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>" " OmniCompletion
+let g:SuperTabDefaultCompletionType = "context" " use context mode
