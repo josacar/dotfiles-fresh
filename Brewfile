@@ -37,7 +37,7 @@ brew 'wakeonlan'
 brew 'wget'
 brew 'youtube-dl'
 
-cask 'amazon-drive'
+cask 'amazon-photos'
 cask 'android-file-transfer'
 cask 'caption'
 cask 'chicken'
