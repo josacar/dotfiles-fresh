@@ -45,10 +45,9 @@ fresh bundle/config --file=~/.bundle/config
 fresh Brewfile --file=~/Brewfile
 
 # plist files
-fresh plist/com.ugolandini.Pomodoro.plist --file=~/Library/Preferences/com.ugolandini.Pomodoro.plist
 fresh plist/com.googlecode.iterm2.plist --file=~/Library/Preferences/com.googlecode.iterm2.plist
 fresh plist/com.ragingmenace.MenuMeters.plist --file=~/Library/Preferences/com.ragingmenace.MenuMeters.plist
-fresh plist/com.divisiblebyzero.Spectacle.plist --file=~/Library/Preferences/com.divisiblebyzero.Spectacle.plist
+fresh plist/io.github.martakostova.Pomodoro.plist --file=~/Library/Preferences/io.github.martakostova.Pomodoro.plist
 
 # Work
 if ! [ -z ${WORK+x} ]; then
