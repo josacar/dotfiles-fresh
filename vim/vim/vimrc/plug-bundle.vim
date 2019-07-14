@@ -30,6 +30,7 @@ Plug 'codegram/vim-codereview' " GitHub Pull Request-based Code Reviews
 Plug 'moll/vim-bbye' " Delete buffers and close files in Vim without closing your windows
 Plug 'AndrewRadev/splitjoin.vim' " simplifies the transition between multiline and single-line code
 Plug 'w0rp/ale' " Syntax checker
+Plug 'NLKNguyen/papercolor-theme'
 
 " Add plugins to &runtimepath
 call plug#end()
