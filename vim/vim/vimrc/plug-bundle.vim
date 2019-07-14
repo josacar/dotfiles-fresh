@@ -7,7 +7,8 @@ Plug 'mattn/gist-vim' " creating gists
 Plug 'scrooloose/nerdtree' " A tree explorer
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 Plug 'godlygeek/tabular' " text filtering and alignment
-Plug 'bling/vim-airline' " lean & mean status/tabline for vim that's light as air
+Plug 'itchyny/lightline.vim' " Status bar
+Plug 'mengelbrecht/lightline-bufferline' " Bufferline plugin
 Plug 'tpope/vim-commentary', { 'tag': 'v1.3' } " comment stuff out
 Plug 'tpope/vim-endwise' " wisely add 'end' in ruby, endfunction/endif/more
 Plug 'tpope/vim-fugitive' " a Git wrapper

@@ -159,34 +159,37 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
+" Airline
 
-" Use poweline fonts in airline
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ' ' " No >
-let g:airline_right_sep = ' ' " No <
-let g:airline_detect_modified = 1 " enable modified detection
-let g:airline_detect_paste = 1 " enable paste detection
-" airline-branch : fugitive.vim
-let g:airline#extensions#branch#enabled = 1
-" airline-hunks : vim-signify or vim-gitgutter
-let g:airline#extensions#hunks#enabled = 1
-" airline-tabline : Top buffer bar
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#tab_nr_type = 0
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#buffer_nr_format = '%s '
-let g:airline#extensions#tabline#fnamemod = ':p:.'
-let g:airline#extensions#tabline#fnamecollapse = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline#extensions#tabline#tab_min_count = 0
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline#extensions#ale = 1
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#min_buffer_count = 2
+
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+
 
 " Override some sections
 " let spc = ' '
