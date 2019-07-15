@@ -68,8 +68,16 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
 " set autoread                     " Update open files when changed externally
 
-" Or use vividchalk
 set t_Co=256
+
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 1,
+  \     }
+  \   }
+  \ }
+
 colorscheme PaperColor
 highlight clear SignColumn
 
@@ -162,7 +170,7 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " Airline
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -210,10 +218,6 @@ set splitright
 
 " Don't print bufferline bar
 let g:bufferline_echo = 0
-
-" Remove trailing newline
-"au BufWritePre * :set binary | set noeol
-"au BufWritePost * :set nobinary | set eol
 
 " SplitJoin plugin
 nmap sj :SplitjoinSplit<cr>
