@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo "Dropping $CISCO_SPLIT_EXC routes ..."
-unset CISCO_SPLIT_EXC
-
-CISCO_BANNER="Modified VPN script"
-
-. /usr/local/etc/vpnc-script
