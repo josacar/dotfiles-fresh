@@ -51,7 +51,10 @@ fresh plist/io.github.martakostova.Pomodoro.plist --file=~/Library/Preferences/i
 
 # Work
 if ! [ -z ${WORK+x} ]; then
-  fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra --file
+  fresh-options --file
+    fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra
+    fresh git@gitlab.com:josacar/work-dotfiles.git .vpnc-script
+  fresh-options
 fi
 
 install_brew(){
