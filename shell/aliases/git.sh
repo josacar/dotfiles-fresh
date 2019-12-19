@@ -66,6 +66,10 @@ git_current_tracking() {
   fi
 }
 
+gcm() {
+  git commit -m "[$(git_current_branch)] $@"
+}
+
 # git log patch
 glp() {
   # don't use the pager if in word-diff mode
