@@ -67,7 +67,7 @@ git_current_tracking() {
 }
 
 gcm() {
-  git commit -m "[$(git_current_branch)] $@"
+  git commit -m "[$(git_current_branch)] $*"
 }
 
 # git log patch
