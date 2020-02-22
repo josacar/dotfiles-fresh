@@ -10,10 +10,10 @@ Lint/AssignmentInCondition:
 Lint/UnusedMethodArgument:
   Enabled: true
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: true
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   # Alignment of parameters in multi-line method calls.
   #
   # The `with_first_parameter` style aligns the following lines along the same
@@ -28,10 +28,6 @@ Layout/AlignParameters:
   #     method_call(a,
   #       b)
   EnforcedStyle: with_fixed_indentation
-
-
-Style/BracesAroundHashParameters:
-  Enabled: true
 
 Style/ClassVars:
   Enabled: true
@@ -63,11 +59,24 @@ Style/GuardClause:
 Style/HashSyntax:
   EnforcedStyle: ruby19
 
-Metrics/LineLength:
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Layout/LineLength:
   Max: 120
 
 Metrics/MethodLength:
   Max: 30
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 
 Style/Next:
   Enabled: true
@@ -106,7 +115,7 @@ Layout/SpaceInsideHashLiteralBraces:
 Style/StringLiterals:
   Enabled: true
 
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: true
 
 Style/TrailingCommaInArguments:
@@ -138,5 +147,6 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - '**/db/schema.rb'
+    - 'vendor/**/*'
 
 require: rubocop-performance
