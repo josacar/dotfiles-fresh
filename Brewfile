@@ -39,7 +39,7 @@ brew 'youtube-dl'
 
 cask 'amazon-photos'
 cask 'android-file-transfer'
-cask 'chicken'
+cask 'beardedspice'
 cask 'cord'
 cask 'cyberduck'
 cask 'docker'
