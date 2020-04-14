@@ -103,7 +103,9 @@ install_asdf(){
 }
 
 permissions(){
-  chmod +x $HOME/.vpnc-script
+  if ! [ -z ${WORK+x} ]; then
+    [ -f $HOME/.vpnc-script ] && chmod +x $HOME/.vpnc-script
+  fi
 }
 
 # fresh hook
