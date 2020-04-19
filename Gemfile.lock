@@ -41,6 +41,3 @@ DEPENDENCIES
   pry
   pry-coolline
   pry-doc
-
-BUNDLED WITH
-   1.17.2
