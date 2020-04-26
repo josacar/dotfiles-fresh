@@ -40,7 +40,7 @@ alias gws='git wip save WIP --untracked'
 alias ggpull='git pull --rebase origin $(git_current_branch)'
 alias gfpull='git pull -u fork --rebase origin $(git_current_branch)'
 alias ggpush='git push origin $(git_current_branch)'
-alias gfpush='git push -u fork origin $(git_current_branch)'
+alias gfpush='git push -u fork $(git_current_branch)'
 alias ggpushf='git push --force-with-lease origin $(git_current_branch)'
 
 alias ghpull='git pull --rebase heroku $(git_current_branch)'
