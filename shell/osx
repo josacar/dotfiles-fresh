@@ -6,4 +6,5 @@ if [ "$(uname)" = "Darwin" ]; then
   defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
   defaults write com.apple.TextEdit SmartQuotes -bool false
   defaults write com.apple.TextEdit SmartDashes -bool false
+  defaults write com.apple.screencapture location $HOME/screenshots
 fi
