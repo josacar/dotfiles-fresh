@@ -108,6 +108,19 @@ permissions(){
   fi
 }
 
+update_defaults(){
+  if [ "$(uname)" = "Darwin" ]; then
+    defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+    defaults write bluetoothaudiod "Enable AptX codec" -bool true
+    defaults write bluetoothaudiod "Enable AAC codec" -bool true
+    defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write com.apple.TextEdit SmartQuotes -bool false
+    defaults write com.apple.TextEdit SmartDashes -bool false
+    defaults write com.apple.screencapture location $HOME/screenshots
+  fi
+}
+
 # fresh hook
 fresh_after_build(){
   create_neovim_symlinks
@@ -115,5 +128,6 @@ fresh_after_build(){
   install_vim_bundle
   install_chefdk_extra_gems
   install_asdf
+  update_defaults
   permissions
 }
