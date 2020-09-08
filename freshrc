@@ -19,8 +19,11 @@ fresh-options
 
 fresh freshshell/fresh contrib/completion/fresh-completion.bash
 
-# Config files
+# root dit config files
 fresh config/\* --file --filter=erb
+
+# dotconfig files
+fresh dotconfig/starship.toml --file=~/.config/starship.toml
 
 # Tmux
 fresh-options --file=~/.tmux.conf --marker=#
