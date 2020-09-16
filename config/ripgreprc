@@ -1,0 +1,2 @@
+# avoid ignoring files ignored by git when searching
+--no-ignore
