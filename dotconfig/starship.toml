@@ -26,3 +26,9 @@ disabled = true
 
 [golang]
 disabled = true
+
+[php]
+disabled = true
+
+[terraform]
+disabled = true
