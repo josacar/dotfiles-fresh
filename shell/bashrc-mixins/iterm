@@ -10,6 +10,7 @@ function tab_color() {
 
 function title {
   echo -ne "\033]0;"$*"\007"
+  printf "\e]1337;SetBadgeFormat=%s\a"   $(echo -n "$*" | base64)
 }
 
 function tab_pure_red { title "$*"; tab_color 255 0 0; }
