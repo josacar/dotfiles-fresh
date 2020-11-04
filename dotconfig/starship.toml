@@ -18,6 +18,9 @@ disabled = true
 [git_status]
 disabled = true
 
+[git_branch]
+format = "[$symbol$branch]($style) "
+
 [nodejs]
 disabled = true
 
@@ -34,4 +37,10 @@ disabled = true
 disabled = true
 
 [gcloud]
+disabled = true
+
+[java]
+disabled = true
+
+[cmake]
 disabled = true
