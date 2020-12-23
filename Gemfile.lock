@@ -3,30 +3,25 @@ GEM
   specs:
     awesome_print (1.8.0)
     coderay (1.1.3)
-    coolline (0.5.0)
-      unicode_utils (~> 1.4)
     fancy_irb (1.2.1)
       paint (>= 0.9, < 3.0)
       unicode-display_width (~> 1.1)
-    ffi (1.13.1)
+    ffi (1.14.2)
     hirb (0.7.3)
     hub (1.12.4)
     interactive_editor (0.0.11)
       spoon (>= 0.0.1)
     method_source (1.0.0)
-    paint (2.2.0)
+    paint (2.2.1)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-coolline (0.2.5)
-      coolline (~> 0.5)
     pry-doc (1.1.0)
       pry (~> 0.11)
       yard (~> 0.9.11)
     spoon (0.0.6)
       ffi
     unicode-display_width (1.7.0)
-    unicode_utils (1.4.0)
     yard (0.9.25)
 
 PLATFORMS
@@ -39,7 +34,6 @@ DEPENDENCIES
   hub
   interactive_editor
   pry
-  pry-coolline
   pry-doc
 
 BUNDLED WITH
