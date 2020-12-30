@@ -6,6 +6,8 @@ test -f $HOME/.asdf/completions/asdf.bash && . $HOME/.asdf/completions/asdf.bash
 type asdf &>/dev/null
 
 if [ $? -eq 0 ]; then
+  export ASDF_RUBY_BUILD_VERSION=master
+
   install_ruby_version(){
     asdf install ruby $1
   }
