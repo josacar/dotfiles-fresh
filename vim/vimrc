@@ -112,6 +112,7 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_by_filename = 0 " set searching by full path
 
 map <leader>gg :e Gemfile<cr>
 "map <leader>gr :e config/routes.rb<cr>
