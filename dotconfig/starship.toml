@@ -44,3 +44,9 @@ disabled = true
 
 [cmake]
 disabled = true
+
+[vagrant]
+disabled = true
+
+[docker_context]
+disabled = true
