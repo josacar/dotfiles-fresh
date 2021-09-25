@@ -62,7 +62,7 @@ if ! [ -z ${WORK+x} ]; then
 fi
 
 install_brew(){
-  if [ "$(uname)" = "Darwin" ] && ! which brew > /dev/null 2>&1; then
+  if [ "$(uname)" = "Darwin" ] && ! command -v brew > /dev/null 2>&1; then
     echo 'Installing brew'
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     cd "$HOME" && brew bundle
@@ -83,7 +83,7 @@ install_chefdk_extra_gems(){
 
 install_chefdk_gem(){
   gem=$1
-  if which chef > /dev/null 2>&1 && chef gem list --no-installed "$gem" > /dev/null 2>&1; then
+  if command -v chef > /dev/null 2>&1 && chef gem list --no-installed "$gem" > /dev/null 2>&1; then
     chef gem install "$gem"
   fi
 }

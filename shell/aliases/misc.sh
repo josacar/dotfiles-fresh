@@ -1,12 +1,12 @@
 alias less='less -r'
 
-which ack-grep > /dev/null
+command -v ack-grep > /dev/null
 [ $? -eq 0 ] && alias ack='ack-grep'
 
-which nvim > /dev/null
+command -v nvim > /dev/null
 [ $? -eq 0 ] && alias vim='nvim'
 
-which exa > /dev/null
+command -v exa > /dev/null
 [ $? -eq 0 ] && alias ls='exa'
 
 alias vless='/usr/share/vim/vim80/macros/less.sh'

@@ -1,4 +1,4 @@
-which rbenv >/dev/null
+command -v rbenv >/dev/null
 
 if [ $? -eq 0 ]; then
   install_ruby_version(){
