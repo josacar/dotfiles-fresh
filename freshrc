@@ -97,6 +97,8 @@ create_neovim_symlinks(){
   [ ! -h "$HOME/.config/nvim/init.vim" ] && \
     rm -rf "$HOME/.config/nvim/init.vim" && \
     ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+  [ ! -d "$HOME/.vim/files/info" ] && \
+    mkdir -p "$HOME/.vim/files/info"
 }
 
 install_asdf(){
