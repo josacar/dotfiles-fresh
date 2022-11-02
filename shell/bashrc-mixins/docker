@@ -1,8 +1,0 @@
-__docker_prompt() {
-  if [ -n "$DOCKER_HOST" ]; then
-    echo " 🐳 "
-  fi
-}
-
-COMPOSE_DOCKER_CLI_BUILD=1
-DOCKER_BUILDKIT=1
