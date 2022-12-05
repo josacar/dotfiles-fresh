@@ -88,10 +88,6 @@ if declare -F __git_ps1 > /dev/null ;then
   PS1="${PS1}\[\033[1;31m\]\$(__git_ps1 \" (%s)\")"
 fi
 
-if declare -F kube_ps1 > /dev/null ;then
-  PS1="${PS1}\$(kube_ps1)"
-fi
-
 PS1="${PS1}\[\033[00m\]\$ "
 
 for dir in tmp _backup undodir; do
