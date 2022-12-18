@@ -34,5 +34,3 @@ silent! let g:plugs['vim-textobj-user'].commit = '41a675ddbeefd6a93664a4dc52f302
 silent! let g:plugs['vimproc'].commit = 'f396529d7868b43d88978eb347bb203353991184'
 silent! let g:plugs['vimux'].commit = '616fcb4799674a7a809b14ca2dc155bb6ba25788'
 silent! let g:plugs['webapi-vim'].commit = '70c49ada7827d3545a65cbdab04c5c89a3a8464e'
-
-PlugUpdate!
