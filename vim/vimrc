@@ -287,3 +287,12 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>" " OmniCompletion
 let g:SuperTabDefaultCompletionType = "context" " use context mode
 
 set clipboard=unnamed " Enable copying to system's clipboard
+
+" vim-commentary
+if maparg('\\','n') ==# '' && maparg('\','n') ==# '' && !hasmapto('<Plug>Commentary')
+  xmap \\  <Plug>Commentary
+  nmap \\  <Plug>Commentary
+  nmap \\\ <Plug>CommentaryLine
+  nmap \\c <Plug>ChangeCommentary
+  nmap \\u <Plug>Commentary<Plug>Commentary
+endif
