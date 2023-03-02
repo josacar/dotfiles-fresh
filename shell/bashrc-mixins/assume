@@ -1,0 +1,5 @@
+which assume &> /dev/null
+
+if [ $? -eq 0 ]; then
+  alias assume="source assume"
+fi
