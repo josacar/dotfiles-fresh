@@ -296,3 +296,7 @@ if maparg('\\','n') ==# '' && maparg('\','n') ==# '' && !hasmapto('<Plug>Comment
   nmap \\c <Plug>ChangeCommentary
   nmap \\u <Plug>Commentary<Plug>Commentary
 endif
+
+let g:ale_linters = {
+\   'ruby': ['standardrb'],
+\}
