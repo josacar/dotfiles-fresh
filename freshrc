@@ -58,6 +58,7 @@ if ! [ -z ${WORK+x} ]; then
   fresh-options --file
     fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra
     fresh git@gitlab.com:josacar/work-dotfiles.git .vpnc-script
+    fresh git@gitlab.com:josacar/work-dotfiles.git ssh/work_config --file=~/.ssh/work_config
   fresh-options
 fi
 
