@@ -1,7 +1,7 @@
 [user]
   email = <%= ENV["GIT_EMAIL"] || "josacar@users.noreply.github.com" %>
   name = Jose Luis Salas
-  signingkey = <%= ENV["GIT_GPG_KEY_ID"] || "926C5673" %>
+  signingkey = <%= ENV["GIT_GPG_KEY_ID"] || "3B5BB81B203269D79D8492D9BE7CDF9012256B23" %>
 [github]
   user = josacar
 [core]
