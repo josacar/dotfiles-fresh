@@ -7,3 +7,5 @@ set convert-meta on
 bind -m vi-insert "\C-l":clear-screen
 bind '"\e\C-e": alias-expand-line'
 bind 'RETURN: "\e\C-e\n"'
+
+export GPG_TTY=$(tty)
