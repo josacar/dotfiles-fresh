@@ -4,6 +4,7 @@ brew 'findutils'
 brew 'gnu-sed'
 
 brew 'asdf'
+brew 'awscli'
 brew 'axel'
 brew 'crystal-lang'
 brew 'bash'
