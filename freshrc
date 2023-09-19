@@ -102,9 +102,9 @@ create_neovim_symlinks(){
 }
 
 install_asdf(){
-  if [ -f /usr/local/opt/asdf/bin/asdf ]; then
-    /usr/local/opt/asdf/bin/asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby || true
-    /usr/local/opt/asdf/bin/asdf plugin-add terraform https://github.com/neerfri/asdf-terraform || true
+  if [ -f /opt/homebrew/bin/asdf ]; then
+    /opt/homebrew/bin/asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby || true
+    /opt/homebrew/bin/asdf plugin-add terraform https://github.com/neerfri/asdf-terraform || true
   fi
 }
 
