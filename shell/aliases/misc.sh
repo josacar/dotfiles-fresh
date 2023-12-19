@@ -1,4 +1,4 @@
-alias less='less -r'
+alias less='\less -r'
 
 command -v ack-grep > /dev/null
 [ $? -eq 0 ] && alias ack='ack-grep'

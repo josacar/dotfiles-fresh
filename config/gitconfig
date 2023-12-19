@@ -34,27 +34,9 @@
 [push]
   default = current
 [alias]
-  aa = add --all
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-  am = am -3
   amend = commit --amend
-  br = branch
-  ci = commit
-  co = checkout
-  com = checkout master
-  cp = cherry-pick
-  dc = diff --cached
-  di = diff
-  ds  = diff --staged
-  dw  = diff --color-words
   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; $EDITOR `f`"
-  fa = fetch --all
-  fap = fetch --all --prune
-  fapu = "!git fap && git pull"
-  fp = format-patch
-  l = "!source ~/.githelpers && pretty_git_log"
-  la = !git l --all
-  ll = log --decorate -p
   log1 = log --abbrev-commit --pretty=oneline
   logf = log --pretty=fuller
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -63,17 +45,9 @@
   noff = merge --no-ff
   pend = log @{upstream}..
   pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
-  pf = push --force-with-lease
   pr  = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
-  r = !git l -20
   review = !"git log master..origin/master"
-  rs = !git l -10
-  ra = !git r --all
-  st = status
-  sh = show
   show-patch = format-patch --stdout -1
-  sm  = submodule
-  smu = submodule foreach git pull origin master
 [branch]
   autosetuprebase = always
 [diff]
