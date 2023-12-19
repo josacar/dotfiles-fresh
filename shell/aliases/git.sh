@@ -24,7 +24,6 @@ alias gl='glg $(git show-ref | cut -d " " -f 2 | grep -v stash$)'
 alias gld="git fsck --lost-found | grep '^dangling commit' | cut -d ' ' -f 3- | xargs git show -s --format='%ct %H' | sort -nr | cut -d ' ' -f 2 | xargs git show --stat"
 alias glg='git log --graph --pretty=format:"%Cred%h%Creset%C(yellow)%d%Creset %s %C(green bold)- %an %C(black bold)%cd (%cr)%Creset" --abbrev-commit --date=short'
 alias gll='git log --decorate -p'
-alias glp='git log -p'
 alias glw='glp --word-diff'
 alias gp='git push'
 alias gpt='git push -u origin $(git_current_branch)'
