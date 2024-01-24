@@ -52,6 +52,7 @@
   autosetuprebase = always
 [diff]
   tool = vimdiff
+  wsErrorHighlight = all
 [difftool "diffmerge"]
   cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
 [merge]
