@@ -22,7 +22,7 @@ GEM
     spoon (0.0.6)
       ffi
     unicode-display_width (2.3.0)
-    yard (0.9.35)
+    yard (0.9.36)
 
 PLATFORMS
   ruby
