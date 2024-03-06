@@ -10,7 +10,7 @@ alias gc='git commit -v'
 alias gca='gc --amend'
 alias gci='git commit'
 alias gco='git checkout'
-alias gcom='git checkout master'
+alias gcom='git checkout $(git_default_branch)'
 alias gcp='git checkout -p'
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -28,8 +28,8 @@ alias glw='glp --word-diff'
 alias gp='git push'
 alias gpt='git push -u origin $(git_current_branch)'
 alias grc='git rebase --continue'
-alias grom='git rebase origin/master'
-alias gromi='git rebase origin/master -i'
+alias grom='git rebase origin/$(git_default_branch)'
+alias gromi='git rebase origin/$(git_default_branch) -i'
 alias grt='git_current_tracking > /dev/null && git rebase -i @{upstream}'
 alias grv='git remote -v'
 alias gs='git status'
@@ -51,6 +51,13 @@ alias ghpull='git pull --rebase heroku $(git_current_branch)'
 alias ghpush='git push heroku $(git_current_branch)'
 
 # helper for git aliases
+
+git_default_branch() {
+  BRANCH=$(git rev-parse --abbrev-ref origin/HEAD)
+  BRANCH="${BRANCH##origin/}"
+  echo "$BRANCH"
+}
+
 git_current_branch() {
   BRANCH="$(git symbolic-ref -q HEAD)"
   BRANCH="${BRANCH##refs/heads/}"
