@@ -6,8 +6,8 @@ command -v ack-grep > /dev/null
 command -v nvim > /dev/null
 [ $? -eq 0 ] && alias vim='nvim'
 
-command -v exa > /dev/null
-[ $? -eq 0 ] && alias ls='exa'
+command -v eza > /dev/null
+[ $? -eq 0 ] && alias ls='eza'
 
 alias vless='/usr/share/vim/vim80/macros/less.sh'
 alias ..="cd .."
