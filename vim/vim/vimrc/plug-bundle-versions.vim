@@ -11,7 +11,6 @@ silent! let g:plugs['gist-vim'].commit = '5bfbb5450d9eff248f6c074de0b78003924393
 silent! let g:plugs['lightline-bufferline'].commit = 'c0199a7027da92d9770d1e2a9f4bf6257c7ec7ef'
 silent! let g:plugs['lightline.vim'].commit = 'b1e91b41f5028d65fa3d31a425ff21591d5d957f'
 silent! let g:plugs['nerdtree'].commit = 'fc85a6f07c2cd694be93496ffad75be126240068'
-silent! let g:plugs['papercolor-theme'].commit = '9051480ad9129ff4ab4fffb38b44779b9081626f'
 silent! let g:plugs['patchreview-vim'].commit = '59d40925f0966e4fe858345491e5c99129e4e7e6'
 silent! let g:plugs['splitjoin.vim'].commit = '956d67c88512b91c2938da3a9e0aeeea2b82cd0b'
 silent! let g:plugs['supertab'].commit = 'f0093ae12a9115498f887199809a6114659fc858'
