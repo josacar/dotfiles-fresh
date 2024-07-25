@@ -70,7 +70,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.scssc,*.sassc
 
 set t_Co=256
 
-colorscheme catppuccin
+colorscheme vividchalk
 highlight clear SignColumn
 
 " Only do this part when compiled with support for autocommands
@@ -153,7 +153,7 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " Airline
 
 let g:lightline = {
-      \ 'colorscheme': 'molokai',
+      \ 'colorscheme': 'vividchalk',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
