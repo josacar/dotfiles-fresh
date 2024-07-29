@@ -153,7 +153,7 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " Airline
 
 let g:lightline = {
-      \ 'colorscheme': 'vividchalk',
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
