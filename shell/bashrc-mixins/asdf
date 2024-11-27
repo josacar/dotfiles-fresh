@@ -10,6 +10,7 @@ if [ $? -eq 0 ]; then
   export ASDF_RUBY_BUILD_VERSION=master
 
   install_ruby_version(){
-    asdf install ruby $1
+    jemalloc-config --version || brew install jemalloc
+    RUBY_CONFIGURE_OPTS="--with-jemalloc-dir=$(brew --prefix jemalloc)" asdf install ruby $1
   }
 fi
