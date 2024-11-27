@@ -11,6 +11,6 @@ if [ $? -eq 0 ]; then
 
   install_ruby_version(){
     jemalloc-config --version || brew install jemalloc
-    RUBY_CONFIGURE_OPTS="--with-jemalloc-dir=$(brew --prefix jemalloc)" asdf install ruby $1
+    RUBY_CONFIGURE_OPTS="--with-jemalloc-dir=$(brew --prefix jemalloc) --enable-yjit" asdf install ruby $1
   }
 fi

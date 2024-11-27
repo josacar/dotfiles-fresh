@@ -5,7 +5,7 @@ brew 'gnu-sed'
 
 brew 'asdf'
 brew 'bash'
-brew 'bash-completion'
+brew 'bash-completion@2'
 brew 'direnv'
 brew 'eza'
 brew 'exiftool'
