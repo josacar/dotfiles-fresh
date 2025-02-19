@@ -1,13 +1,10 @@
-test -f /opt/homebrew/opt/asdf/libexec/asdf.sh && . /opt/homebrew/opt/asdf/libexec/asdf.sh
-test -f /opt/homebrew/opt/asdf/asdf.sh && . /opt/homebrew/opt/asdf/asdf.sh
-test -f /opt/homebrew/etc/bash_completion.d/asdf.bash && . /opt/homebrew/etc/bash_completion.d/asdf.bash
-test -f $HOME/.asdf/asdf.sh && . $HOME/.asdf/asdf.sh
-test -f $HOME/.asdf/completions/asdf.bash && . $HOME/.asdf/completions/asdf.bash
+test -f /opt/homebrew/etc/bash_completion.d/asdf && . /opt/homebrew/etc/bash_completion.d/asdf
 
 type asdf &>/dev/null
 
 if [ $? -eq 0 ]; then
-  export ASDF_RUBY_BUILD_VERSION=master
+  export ASDF_DATA_DIR=$HOME/.asdf
+  export PATH=$ASDF_DATA_DIR/shims:$PATH
 
   install_ruby_version(){
     jemalloc-config --version || brew install jemalloc
