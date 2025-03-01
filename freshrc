@@ -39,6 +39,7 @@ fresh-options
 # Vim
 fresh vim/vimrc --file
 fresh vim/vim --file=~/.vim/
+fresh nvim --file=~/.config/nvim/
 
 # OpenSSH
 fresh ssh/config --file=~/.ssh/config
@@ -97,20 +98,20 @@ install_chefdk_gem(){
 create_neovim_symlinks(){
   [ ! -d "$HOME/.config" ] && \
     mkdir -p "$HOME/.config"
-  [ ! -L "$HOME/.config/nvim" ] && \
-    rm -rf "$HOME/.config/vim" && \
-    ln -s "$HOME/.vim" "$HOME/.config/nvim"
-  [ ! -h "$HOME/.config/nvim/init.vim" ] && \
-    rm -rf "$HOME/.config/nvim/init.vim" && \
-    ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+  # [ ! -L "$HOME/.config/nvim" ] && \
+  #   rm -rf "$HOME/.config/vim" && \
+  #   ln -s "$HOME/.vim" "$HOME/.config/nvim"
+  # [ ! -h "$HOME/.config/nvim/init.vim" ] && \
+  #    rm -rf "$HOME/.config/nvim/init.vim" && \
+  #    ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
   [ ! -d "$HOME/.vim/files/info" ] && \
     mkdir -p "$HOME/.vim/files/info"
 }
 
 install_asdf(){
   if [ -f /opt/homebrew/bin/asdf ]; then
-    /opt/homebrew/bin/asdf plugin-add ruby ruby || true
-    /opt/homebrew/bin/asdf plugin-add terraform || true
+    /opt/homebrew/bin/asdf plugin add ruby ruby || true
+    /opt/homebrew/bin/asdf plugin add terraform || true
   fi
 }
 
@@ -135,7 +136,7 @@ update_defaults(){
 fresh_after_build(){
   create_neovim_symlinks
   install_brew
-  install_vim_bundle
+  # install_vim_bundle
   install_chefdk_extra_gems
   install_asdf
   update_defaults
