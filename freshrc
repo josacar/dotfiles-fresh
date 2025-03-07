@@ -7,6 +7,7 @@ fresh bin/\* --bin
 # Some shell stuff
 fresh shell/bashrc
 fresh shell/profile
+fresh shell/brew
 fresh shell/editor.sh
 fresh shell/aliases/\*
 fresh shell/completions/\*
