@@ -5,3 +5,7 @@
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
+
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = false
