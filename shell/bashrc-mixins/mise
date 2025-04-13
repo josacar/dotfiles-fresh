@@ -1,0 +1,5 @@
+type mise &>/dev/null
+
+if [ $? -eq 0 ]; then
+  eval "$(mise activate bash)"
+fi
