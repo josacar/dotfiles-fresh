@@ -15,8 +15,7 @@ fresh shell/bashrc-mixins/\*
 fresh rupa/z z.sh
 
 fresh-options --file=~/.bashrc --marker=#
-  fresh freshshell/fresh contrib/source-build.sh
-
+fresh freshshell/fresh contrib/source-build.sh
 fresh-options
 
 fresh freshshell/fresh contrib/completion/fresh-completion.bash
@@ -26,6 +25,7 @@ fresh config/\* --file --filter=erb
 
 # dotconfig files
 fresh dotconfig/starship.toml --file=~/.config/starship.toml
+fresh dotconfig/mise.toml --file=~/.config/mise/config.toml
 
 # gpg-agent
 if [ "$(uname)" = "Darwin" ]; then
@@ -34,7 +34,7 @@ fi
 
 # Tmux
 fresh-options --file=~/.tmux.conf --marker=#
-  fresh tmux/\*
+fresh tmux/\*
 fresh-options
 
 # Vim
@@ -65,64 +65,58 @@ fresh steampipe/config --file=~/.steampipe/config/
 # Work
 if [ -n "${WORK+x}" ]; then
   fresh-options --file
-    fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra
-    fresh git@gitlab.com:josacar/work-dotfiles.git .vpnc-script
-    fresh git@gitlab.com:josacar/work-dotfiles.git ssh/work_config --file=~/.ssh/work_config
+  fresh git@gitlab.com:josacar/work-dotfiles.git .bashrc-extra
+  fresh git@gitlab.com:josacar/work-dotfiles.git .vpnc-script
+  fresh git@gitlab.com:josacar/work-dotfiles.git ssh/work_config --file=~/.ssh/work_config
   fresh-options
 fi
 
-install_brew(){
-  if [ "$(uname)" = "Darwin" ] && ! command -v brew > /dev/null 2>&1; then
+install_brew() {
+  if [ "$(uname)" = "Darwin" ] && ! command -v brew >/dev/null 2>&1; then
     echo 'Installing brew'
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     cd "$HOME" && brew bundle
   fi
 }
 
-install_vim_bundle(){
+install_vim_bundle() {
   vim +PlugInstall +PlugUpdate +qall
 }
 
-install_chefdk_extra_gems(){
+install_chefdk_extra_gems() {
   install_chefdk_gem kitchen-dokken
   install_chefdk_gem kitchen-inspec
   install_chefdk_gem inspec
 }
 
-install_chefdk_gem(){
+install_chefdk_gem() {
   gem=$1
-  if command -v chef > /dev/null 2>&1 && chef gem list --no-installed "$gem" > /dev/null 2>&1; then
+  if command -v chef >/dev/null 2>&1 && chef gem list --no-installed "$gem" >/dev/null 2>&1; then
     chef gem install "$gem"
   fi
 }
 
-create_neovim_symlinks(){
-  [ ! -d "$HOME/.config" ] && \
+create_neovim_symlinks() {
+  [ ! -d "$HOME/.config" ] &&
     mkdir -p "$HOME/.config"
-  # [ ! -L "$HOME/.config/nvim" ] && \
-  #   rm -rf "$HOME/.config/vim" && \
-  #   ln -s "$HOME/.vim" "$HOME/.config/nvim"
-  # [ ! -h "$HOME/.config/nvim/init.vim" ] && \
-  #    rm -rf "$HOME/.config/nvim/init.vim" && \
-  #    ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
-  [ ! -d "$HOME/.vim/files/info" ] && \
+  [ ! -d "$HOME/.vim/files/info" ] &&
     mkdir -p "$HOME/.vim/files/info"
 }
 
-install_asdf(){
+install_asdf() {
   if [ -f /opt/homebrew/bin/asdf ]; then
     /opt/homebrew/bin/asdf plugin add ruby ruby || true
     /opt/homebrew/bin/asdf plugin add terraform || true
   fi
 }
 
-permissions(){
+permissions() {
   if ! [ -z ${WORK+x} ]; then
     [ -f $HOME/.vpnc-script ] && chmod +x $HOME/.vpnc-script
   fi
 }
 
-update_defaults(){
+update_defaults() {
   if [ "$(uname)" = "Darwin" ]; then
     defaults write com.apple.desktopservices DSDontWriteNetworkStores true
     defaults write bluetoothaudiod "Enable AptX codec" -bool true
@@ -134,7 +128,7 @@ update_defaults(){
 }
 
 # fresh hook
-fresh_after_build(){
+fresh_after_build() {
   create_neovim_symlinks
   install_brew
   # install_vim_bundle

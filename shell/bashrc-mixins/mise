@@ -3,11 +3,6 @@ type mise &>/dev/null
 if [ $? -eq 0 ]; then
   eval "$(mise activate bash)"
 
-  type usage &>/dev/null
-  if [ $? -ne 0 ]; then
-    mise use -g usage
-  fi
-
   install_ruby_version(){
     if [ "$(uname)" = "Darwin" ]; then
       RUBY_CONFIGURE_OPTS="--with-jemalloc-dir=$(brew --prefix jemalloc) --enable-yjit" mise use ruby@$1
