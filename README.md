@@ -1,6 +1,10 @@
 My personal dotfiles
 ====================
 
+## DEPRECATED
+
+These dotfiles has moved to [chezmoi](https://github.com/josacar/dotfiles)
+
 ## Installation
 
 ``` sh
